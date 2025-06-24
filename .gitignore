@@ -1,0 +1,66 @@
+# Build outputs
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+*.cache
+*.pdb
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS IDE folders
+.vs/
+.idea/
+.vscode/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+
+# Logs and temp files
+*.log
+Logs/
+*.tmp
+*.bak
+*.swp
+*~ 
+~$*
+
+# Debug/Release folders
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+
+# WPF specific cache
+Generated_Code/
+
+# Rider IDE
+.idea/
+
+# Publish artifacts
+artifacts/
+publish/
+
+# AppSettings (connection string, mail credentials, etc.)
+appsettings.Local.json
+*.local.config
+
+# Nếu mỗi người dùng có config riêng thì để vào file ví dụ:
+# appsettings.trung.local.json, appsettings.lan.local.json
+appsettings.*.local.json
+
+# Don't ignore your actual appsettings (optional)
+!appsettings.json
+
+# Optional: database files (if using SQLite local)
+*.db
+*.mdf
+*.ldf
