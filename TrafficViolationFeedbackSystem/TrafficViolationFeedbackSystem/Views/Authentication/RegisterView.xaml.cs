@@ -10,35 +10,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TrafficViolationFeedbackSystem.Views
+namespace TrafficViolationFeedbackSystem.Views.Authentication
 {
     /// <summary>
-    /// Interaction logic for RegisterWindow.xaml
+    /// Interaction logic for RegisterView.xaml
     /// </summary>
-    public partial class RegisterWindow : Window
+    public partial class RegisterView : UserControl
     {
-        public RegisterWindow()
-        {
+        public Action ShowLoginView { get; set; }
+
+        public RegisterView()
+        { 
             InitializeComponent();
         }
+
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-
+            // Gọi DAO đăng ký ở đây
         }
-
-        private void btnRegister_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void tblGoToLogin_MouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
-
+            ShowLoginView?.Invoke();
         }
 
-        private void tblLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
-
-            this.Close();
-        }
     }
+
 }

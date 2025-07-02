@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TrafficViolationFeedbackSystem.Views"
+        xmlns:local="clr-namespace:TrafficViolationFeedbackSystem.Views.Citizen"
         mc:Ignorable="d"
         Title="TrafficTrack Dashboard"
         Width="1344" Height="756"
@@ -12,35 +12,6 @@
         ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow">
 
-    <Window.Resources>
-        <!-- Style cho nút chức năng -->
-        <Style x:Key="ModernButton" TargetType="Button">
-            <Setter Property="Width" Value="300"/>
-            <Setter Property="Height" Value="80"/>
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Background" Value="#007BFF"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#0056b3"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -52,7 +23,7 @@
         <!-- Sidebar -->
         <Grid Grid.Column="0" Background="#F5F5F5">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
-                <TextBlock Text="🚗 TrafficTrack"
+                <TextBlock Text="🚗 VneTraffic"
                FontSize="30"
                Foreground="#007BFF"
                FontWeight="Bold"
@@ -94,14 +65,11 @@
         </Grid>
 
         <!-- Nội dung chính -->
-        <Grid Grid.Column="1">
-            <Grid.Background>
+        <Grid Grid.Column="1" Height="740" VerticalAlignment="Bottom">
+            <Grid.Background >
                 <ImageBrush ImageSource="/Assets/Image/imageTraffic.png" Stretch="UniformToFill"/>
             </Grid.Background>
-            <ContentControl x:Name="MainContent"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Margin="20"/>
+            <ContentControl x:Name="MainContent" Margin="0,0,10,0"/>
         </Grid>
     </Grid>
 </Window>
