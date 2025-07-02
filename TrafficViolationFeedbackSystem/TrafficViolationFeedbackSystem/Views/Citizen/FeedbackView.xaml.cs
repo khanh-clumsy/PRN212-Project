@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TrafficViolationFeedbackSystem.Views
+namespace TrafficViolationFeedbackSystem.Views.Citizen
 {
     /// <summary>
-    /// Interaction logic for CitizenDashboardWindow.xaml
+    /// Interaction logic for FeedbackView.xaml
     /// </summary>
-    public partial class CitizenDashboardWindow : Window
+    public partial class FeedbackView : UserControl
     {
-        public CitizenDashboardWindow()
+        public FeedbackView()
         {
             InitializeComponent();
         }

@@ -37,7 +37,6 @@ namespace TrafficViolationFeedbackSystem.Views
         {
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();
-
             this.Close();
         }
     }

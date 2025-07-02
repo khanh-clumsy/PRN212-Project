@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="TrafficViolationFeedbackSystem.Views.Citizen.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TrafficViolationFeedbackSystem.Views.Citizen"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Background="Transparent">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Hàng 1 -->
+        <Button Content="🚦 Gửi phản ánh vi phạm"
+        Grid.Row="0" Grid.Column="0"
+        Style="{StaticResource ModernButton}"
+        Click="btnReportViolation_Click"/>
+
+        <Button Content="🔍 Xem vi phạm của tôi"
+        Grid.Row="0" Grid.Column="1"
+        Style="{StaticResource ModernButton}"
+        Click="btnViewMyViolations_Click"/>
+
+        <Button Content="📩 Xem phản hồi vi phạm"
+        Grid.Row="0" Grid.Column="2"
+        Style="{StaticResource ModernButton}"
+        Click="btnViewFeedback_Click"/>
+
+        <!-- Hàng 2 -->
+        <Button Content="⚖️ Phản hồi/Kháng cáo"
+        Grid.Row="1" Grid.Column="0"
+        Style="{StaticResource ModernButton}"
+        Click="btnAppeal_Click"/>
+
+        <Button Content="💳 Nộp phạt"
+        Grid.Row="1" Grid.Column="2"
+        Style="{StaticResource ModernButton}"
+        Click="btnPayFine_Click"/>
+    </Grid>
+</UserControl>
