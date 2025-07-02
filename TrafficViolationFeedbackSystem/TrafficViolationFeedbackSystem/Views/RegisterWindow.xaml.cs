@@ -15,28 +15,28 @@ using System.Windows.Shapes;
 namespace TrafficViolationFeedbackSystem.Views
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for RegisterWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class RegisterWindow : Window
     {
-        public LoginWindow()
+        public RegisterWindow()
         {
             InitializeComponent();
         }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void tblForgotPassword_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void tblRegister_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void btnRegister_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            RegisterWindow registerWindow = new RegisterWindow();
-            registerWindow.Show();
+
+        }
+
+        private void tblLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
 
             this.Close();
         }
