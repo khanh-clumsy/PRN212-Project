@@ -6,12 +6,49 @@
              xmlns:local="clr-namespace:TrafficViolationFeedbackSystem.Views.Citizen"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="🔍 Xem vi phạm của tôi"
-                   FontSize="30"
-                   FontWeight="Bold"
-                   Foreground="DarkBlue"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock Text="📜 Lịch sử vi phạm giao thông"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="DarkBlue"
+                       Margin="0 0 0 10"
+                       HorizontalAlignment="Center"/>
+
+            <DataGrid x:Name="dgViolations"
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="Column"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      Margin="0 10 0 0"
+                      FontSize="14">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã Vi Phạm" Binding="{Binding ViolationId}" Width="Auto" />
+                    <DataGridTextColumn Header="Loại Vi Phạm" Binding="{Binding Report.ViolationType.Name}" Width="*" />
+                    <DataGridTextColumn Header="Mô Tả" Binding="{Binding Report.Description}" Width="2*" />
+                    <DataGridTextColumn Header="Ngày Vi Phạm" Binding="{Binding FineDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="Auto" />
+                    <DataGridTextColumn Header="Mức Phạt (VNĐ)" Binding="{Binding FineAmount}" Width="Auto" />
+                    <DataGridTextColumn Header="Đã Nộp Phạt" Binding="{Binding PaidStatusText}" Width="Auto" />
+
+                    <!-- Cột chứa nút Gửi kháng cáo -->
+                    <DataGridTemplateColumn Header="Kháng Cáo" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Kháng cáo"
+                                        Width="90"
+                                        Height="25"
+                                        Margin="4"
+                                        Background="Orange"
+                                        Foreground="White"
+                                        FontWeight="Bold"
+                                        Tag="{Binding ViolationId}"
+                                        Click="AppealButton_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -32,6 +32,9 @@
     <Compile Update="Views\Citizen\ReportViolationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Citizen\SendAppealWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Citizen\StatisticsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

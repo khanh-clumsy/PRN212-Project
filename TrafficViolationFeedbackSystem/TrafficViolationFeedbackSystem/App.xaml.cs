@@ -47,7 +47,7 @@ namespace TrafficViolationFeedbackSystem
                 db.Database.OpenConnection();
                 db.Database.CloseConnection();
 
-                Console.WriteLine("✅ [INFO] Kết nối CSDL thành công!");
+                MessageBox.Show("✅ [INFO] Kết nối CSDL thành công!");
             }
             catch (Exception ex)
             {
