@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using TrafficViolationFeedbackSystem.Models;
+using System.Text.RegularExpressions;
 
 namespace TrafficViolationFeedbackSystem
 {
@@ -51,10 +52,32 @@ namespace TrafficViolationFeedbackSystem
             {
                 using (var context = new TrafficViolationFeedbackSystemContext())
                 {
-                    // Kiểm tra email duy nhất
+                    // Kiểm tra duy nhất
+                    if (!Regex.IsMatch(NewUser.FullName, @"^[\p{L}\s]+$"))
+                    { 
+                        MessageBox.Show("Họ tên chỉ được chứa chữ cái và dấu cách.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                     }
+
+                    if (!Regex.IsMatch(NewUser.Email, @"^[a-zA-Z0-9._%+-]+@gmail\.com$"))
+                    {
+                        MessageBox.Show("Email phải có định dạng @gmail.com.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
                     if (context.Users.Any(u => u.Email == NewUser.Email))
                     {
                         MessageBox.Show("Email đã tồn tại. Vui lòng chọn email khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    if(!Regex.IsMatch(NewUser.Phone, @"^0[0-9]{9}$"))
+                    {
+                        MessageBox.Show("Số điện thoại chỉ được chứa 10 số & bắt đầu từ 0.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    if (context.Users.Any(u => u.Phone == NewUser.Phone))
+                    {
+                        MessageBox.Show("Phone đã tồn tại. Vui lòng chọn Phone khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 

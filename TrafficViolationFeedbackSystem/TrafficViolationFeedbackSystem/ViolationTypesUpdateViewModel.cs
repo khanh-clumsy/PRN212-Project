@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using TrafficViolationFeedbackSystem.Models;
@@ -52,6 +53,13 @@ namespace TrafficViolationFeedbackSystem
                     if (context.ViolationTypes.Any(vt => vt.Name == UpdatedViolationType.Name && vt.ViolationTypeId != UpdatedViolationType.ViolationTypeId))
                     {
                         MessageBox.Show("Tên loại vi phạm đã tồn tại. Vui lòng chọn tên khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // Kiểm tra StandardFine chỉ chứa số
+                    if (!Regex.IsMatch(UpdatedViolationType.StandardFine.ToString(), @"^[0-9]+$"))
+                    {
+                        MessageBox.Show("Mức phạt tiêu chuẩn chỉ được chứa số.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 

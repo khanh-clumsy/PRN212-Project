@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using TrafficViolationFeedbackSystem.Models;
+using System.Text.RegularExpressions;
 
 namespace TrafficViolationFeedbackSystem
 {
@@ -54,10 +55,36 @@ namespace TrafficViolationFeedbackSystem
                         return;
                     }
 
+                    if (!Regex.IsMatch(UpdatedUser.FullName, @"^[\p{L}\s]+$"))
+                    {
+                        MessageBox.Show("Họ tên chỉ được chứa chữ cái và dấu cách.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // Kiểm tra định dạng Email
+                    if (!Regex.IsMatch(UpdatedUser.Email, @"^[a-zA-Z0-9._%+-]+@gmail\.com$"))
+                    {
+                        MessageBox.Show("Email phải có định dạng @gmail.com.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
                     // Kiểm tra email duy nhất (trừ chính User hiện tại)
                     if (context.Users.Any(u => u.Email == UpdatedUser.Email && u.UserId != UpdatedUser.UserId))
                     {
                         MessageBox.Show("Email đã tồn tại. Vui lòng chọn email khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    // Kiểm tra định dạng Phone (nếu có)
+                    if (!Regex.IsMatch(UpdatedUser.Phone, @"^0[0-9]{9}$"))
+                    {
+                        MessageBox.Show("Số điện thoại chỉ chứa đúng 10 số và bắt đầu bằng 0.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    // Kiểm tra Phone duy nhất (trừ chính User hiện tại)
+                    if (context.Users.Any(u => u.Phone == UpdatedUser.Phone && u.UserId != UpdatedUser.UserId))
+                    {
+                        MessageBox.Show("Phone đã tồn tại. Vui lòng chọn Phone khác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 

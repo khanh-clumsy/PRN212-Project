@@ -7,19 +7,28 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <!-- Tiêu đề -->
         <TextBlock Grid.Row="0" Text="Violation Statistics" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
-
+        <!-- Filter Input and Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+            <TextBlock Text="Filter by Plate Number:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox Width="150" Text="{Binding FilterPlateNumber}" Margin="0,0,10,0"/>
+            <Button Content="Filter" Width="100" Padding="10,2" Command="{Binding FilterCommand}"/>
+            <Button Content="Reset" Width="100" Padding="10,2" Command="{Binding ResetFilterCommand}" Margin="10,0,0,0"/>
+        </StackPanel>
         <!-- DataGrid for Violations -->
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Violations}" AutoGenerateColumns="False" Margin="0,0,34,-63"
+        <DataGrid Grid.Row="2" ItemsSource="{Binding Violations}"                  
+                  AutoGenerateColumns="False" Margin="0,0,34,-63"
                   CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Violation ID" Binding="{Binding ViolationId}" Width="100"/>
                 <DataGridTextColumn Header="Violator Name" Binding="{Binding Violator.FullName ,TargetNullValue='Unknown'}" Width="150"/>
+                <DataGridTextColumn Header="PlateNumber" Binding="{Binding Report.PlateNumber}" Width="*"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Report.Description}" Width="*"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Report.Location}" Width="*"/>
                 <DataGridTextColumn Header="Fine Amount" Binding="{Binding FineAmount, StringFormat=\{0:N0\} VND}" Width="120"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding FineDate, StringFormat=\{0:dd/MM/yyyy HH:mm\}}" Width="120"/>
                 <DataGridTextColumn Header="Paid Status" Binding="{Binding PaidStatus, StringFormat=\{0:Paid;Unpaid\}}" Width="100"/>
