@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.Data;
 
 namespace TrafficViolationFeedbackSystem.Views.Citizen
+
 {
     /// <summary>
     /// Interaction logic for HomeView.xaml
@@ -35,9 +36,9 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             setContent?.Invoke(new ReportViolationView(_context));
         }
 
-        private void btnViewFeedback_Click(object sender, RoutedEventArgs e)
+        private void btnViewReportList_Click(object sender, RoutedEventArgs e)
         {
-            setContent?.Invoke(new FeedbackView());
+            setContent?.Invoke(new ReportList());
         }
 
         private void btnAppeal_Click(object sender, RoutedEventArgs e)
@@ -55,6 +56,9 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             setContent?.Invoke(new ViewViolationsView());
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

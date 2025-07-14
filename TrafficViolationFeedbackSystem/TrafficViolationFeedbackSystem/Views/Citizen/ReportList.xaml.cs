@@ -18,9 +18,9 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     /// <summary>
     /// Interaction logic for FeedbackView.xaml
     /// </summary>
-    public partial class FeedbackView : UserControl
+    public partial class ReportList : UserControl
     {
-        public FeedbackView()
+        public ReportList()
         {
             InitializeComponent();
         }

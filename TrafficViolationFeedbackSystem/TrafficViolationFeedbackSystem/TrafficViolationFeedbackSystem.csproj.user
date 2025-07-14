@@ -17,7 +17,7 @@
     <Compile Update="Views\Citizen\CitizenDashboardWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Citizen\FeedbackView.xaml.cs">
+    <Compile Update="Views\Citizen\ReportList.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Citizen\HomeView.xaml.cs">
