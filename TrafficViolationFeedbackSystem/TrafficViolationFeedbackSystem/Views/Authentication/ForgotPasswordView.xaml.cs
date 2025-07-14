@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrafficViolationFeedbackSystem.Data;
 
 namespace TrafficViolationFeedbackSystem.Views.Authentication
 {
@@ -21,10 +22,12 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
     public partial class ForgotPasswordView : UserControl
     {
         public Action ShowLoginView { get; set; }
+        private readonly TrafficViolationFeedbackSystemContext _context;
 
-        public ForgotPasswordView()
+        public ForgotPasswordView(TrafficViolationFeedbackSystemContext context)
         {
             InitializeComponent();
+            _context = context;
         }
 
         private void tblGoToLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

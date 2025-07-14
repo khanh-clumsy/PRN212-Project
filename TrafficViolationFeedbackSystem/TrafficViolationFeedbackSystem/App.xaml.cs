@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using TrafficViolationFeedbackSystem.Data;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using TrafficViolationFeedbackSystem.DAO;
+using TrafficViolationFeedbackSystem.Data;
+using TrafficViolationFeedbackSystem.Views.Citizen;
 
 namespace TrafficViolationFeedbackSystem
 {
@@ -47,7 +48,7 @@ namespace TrafficViolationFeedbackSystem
                 db.Database.OpenConnection();
                 db.Database.CloseConnection();
 
-                Console.WriteLine("✅ [INFO] Kết nối CSDL thành công!");
+                MessageBox.Show("✅ [INFO] Kết nối CSDL thành công!");
             }
             catch (Exception ex)
             {
@@ -55,12 +56,12 @@ namespace TrafficViolationFeedbackSystem
                 Shutdown();
             }
 
-            // Khởi động UI
-            //var loginWindow = new Views.Authentication.LoginWindow();
-            //loginWindow.Show();
+            //Khởi động UI
+            var loginWindow = new Views.Authentication.LoginWindow();
+            loginWindow.Show();
 
-            var cizitenDashboardWindow = new Views.Citizen.CitizenDashboardWindow();
-            cizitenDashboardWindow.Show();
+            //var cizitenDashboardWindow = new Views.Citizen.CitizenDashboardWindow();
+            //cizitenDashboardWindow.Show();
         }
     }
 }
