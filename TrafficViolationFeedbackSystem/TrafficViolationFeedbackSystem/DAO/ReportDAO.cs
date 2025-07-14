@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 using TrafficViolationFeedbackSystem.Data;
 using TrafficViolationFeedbackSystem.Models;
 
@@ -15,11 +16,36 @@ namespace TrafficViolationFeedbackSystem.DAO
         {
             _context = context;
         }
-
+        public async Task UpdateStatus(int reportId, string newStatus)
+        {
+            var report = await _context.Reports.FirstOrDefaultAsync(r => r.ReportId == reportId);
+            if (report != null)
+            {
+                report.Status = newStatus;
+                _context.SaveChanges();
+            }
+        }
+        public async Task<List<Report>> GetAllReportsAsync()
+        {
+            return await _context.Reports
+                 .Include(r => r.Reporter)
+                 .Include(r => r.ViolationType)
+                 .Include(r => r.Attachments)
+                 .ToListAsync();
+        }
+        public async Task UpdateReportStatusAsync(int reportId, string status)
+        {
+            var report = await _context.Reports.FirstOrDefaultAsync(r => r.ReportId == reportId);
+            if (report != null)
+            {
+                report.Status = status;
+                await _context.SaveChangesAsync();
+            }
+        }
         public async Task CreateReportWithAttachment(Report report, string filePath)
         {
             await _context.Reports.AddAsync(report);
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
 
             if (!string.IsNullOrEmpty(filePath))
             {
@@ -29,7 +55,7 @@ namespace TrafficViolationFeedbackSystem.DAO
 
                 if (!allowedExts.Contains(ext))
                     MessageBox.Show("Chỉ hỗ trợ ảnh (.jpg, .jpeg, .png) và video (.mp4)");
-                
+
                 // Kiểm tra dung lượng file
                 FileInfo fileInfo = new FileInfo(filePath);
                 if (fileInfo.Length > 5 * 1024 * 1024) // > 5MB

@@ -12,11 +12,9 @@ namespace TrafficViolationFeedbackSystem.Controllers
     public class UserController
     {
         private readonly UserDAO _userDAO;
-        private readonly TrafficViolationFeedbackSystemContext _context;
         public UserController(TrafficViolationFeedbackSystemContext context)
         {
-            _context = context;
-            _userDAO = new UserDAO(_context);
+            _userDAO = new UserDAO(context);
         }
 
         public (bool success, string message) Register(string fullName, string email, string password, string confirmPassword)

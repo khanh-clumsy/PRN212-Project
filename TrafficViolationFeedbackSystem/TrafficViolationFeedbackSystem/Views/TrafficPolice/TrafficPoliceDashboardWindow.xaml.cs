@@ -1,35 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.Data;
-using TrafficViolationFeedbackSystem.Services;
 using TrafficViolationFeedbackSystem.Views.Authentication;
+using TrafficViolationFeedbackSystem.Views.Citizen;
 
-namespace TrafficViolationFeedbackSystem.Views.Citizen
+namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
 {
-    /// <summary>
-    /// Interaction logic for CitizenDashboardWindow.xaml
-    /// </summary>
-    public partial class CitizenDashboardWindow : Window
+    public partial class TrafficPoliceDashboardWindow : Window
     {
-        private readonly TrafficViolationFeedbackSystemContext _context = new TrafficViolationFeedbackSystemContext(); 
-        public CitizenDashboardWindow()
+        private readonly TrafficViolationFeedbackSystemContext _context = new TrafficViolationFeedbackSystemContext();
+        public TrafficPoliceDashboardWindow()
         {
             InitializeComponent();
             var btn = btnHome;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
-            SetContent(new HomeView(SetContent, _context));
+            SetContent(new TrafficPoliceHomeView(SetContent, _context));
         }
 
         public void SetContent(UserControl view)
@@ -39,7 +26,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
 
         private void ResetSidebarButtonStyles()
         {
-            var buttons = new[] { btnHome, btnProfile, btnLogout };
+            var buttons = new[] { btnHome, btnStatistics, btnProfile, btnLogout };
             foreach (var btn in buttons)
             {
                 btn.Background = Brushes.Transparent;
@@ -53,9 +40,8 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             var btn = sender as Button;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
-            SetContent(new HomeView(SetContent, _context));
+            SetContent(new TrafficPoliceHomeView(SetContent, _context));
         }
-
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Xử lý mở Hồ sơ cá nhân
@@ -66,18 +52,24 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             SetContent(new ProfileView());
         }
 
+        private void btnStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            ResetSidebarButtonStyles();
+            var btn = sender as Button;
+            btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
+            btn.Foreground = Brushes.White;
+            SetContent(new TrafficPoliceStatisticsView());
+        }
+
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                // Quay về màn hình đăng nhập
                 var loginWindow = new LoginWindow();
                 loginWindow.Show();
-
-                // Đóng dashboard
                 this.Close();
             }
         }
     }
-}
+} 

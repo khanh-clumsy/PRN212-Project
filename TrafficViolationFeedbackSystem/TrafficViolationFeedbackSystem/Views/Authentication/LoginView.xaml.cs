@@ -26,7 +26,7 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
     {
         public Action ShowRegisterView { get; set; }
         public Action ShowForgotPasswordView { get; set; }
-        public Action<User> OnLoginSuccess { get; set; }
+        public Action<Models.User> OnLoginSuccess { get; set; }
 
         private readonly UserController _userController;
 
@@ -108,9 +108,6 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
             txtPassword.Password = string.Empty;
         }
 
-        /// <summary>
-        /// Xử lý sự kiện nhấn Enter trong ô password
-        /// </summary>
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

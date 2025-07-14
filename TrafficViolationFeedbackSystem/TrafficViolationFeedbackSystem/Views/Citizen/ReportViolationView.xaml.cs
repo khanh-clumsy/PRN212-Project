@@ -81,7 +81,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             }
             else
             {
-                User owner = await _userController.GetVehicleOwnerByPlateNumber(plateNumber);
+                Models.User owner = await _userController.GetVehicleOwnerByPlateNumber(plateNumber);
                 if (owner == null)
                 {
                     MessageBox.Show("Biển số xe không tồn tại trong hệ thống.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);

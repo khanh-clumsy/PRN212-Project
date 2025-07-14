@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.Data;
 using TrafficViolationFeedbackSystem.Models;
 using TrafficViolationFeedbackSystem.Views.Citizen;
+using TrafficViolationFeedbackSystem.Views.TrafficPolice;
 
 namespace TrafficViolationFeedbackSystem.Views.Authentication
 {
@@ -59,7 +60,7 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
         /// Xử lý sự kiện đăng nhập thành công
         /// </summary>
         /// <param name="user">Thông tin người dùng đã đăng nhập</param>
-        private void OnLoginSuccess(User user)
+        private void OnLoginSuccess(Models.User user)
         {
             try
             {
@@ -68,6 +69,7 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
                 switch (user.Role)
                 {
                     case "Citizen":
+                        MessageBox.Show("Đăng nhập bằng vai trò: Người dân", "Vai trò", MessageBoxButton.OK);
                         dashboardWindow = new CitizenDashboardWindow();
                         break;
 
@@ -77,15 +79,14 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
                         break;
 
                     case "TrafficPolice":
-                        MessageBox.Show("TrafficPolice", "TrafficPolice", MessageBoxButton.OK);
-                        //dashboardWindow = new PoliceDashboardWindow(); // nếu có
+                        MessageBox.Show("Đăng nhập bằng vai trò: Cảnh sát giao thông", "Vai trò", MessageBoxButton.OK);
+                        dashboardWindow = new TrafficPoliceDashboardWindow(); // nếu có
                         break;
 
                     default:
                         MessageBox.Show("Không xác định được vai trò người dùng.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                 }
-
                 dashboardWindow.Show();
                 this.Close();
             }

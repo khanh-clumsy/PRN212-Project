@@ -26,16 +26,10 @@
     <Compile Update="Views\Citizen\PayFineView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Citizen\ProfileView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Citizen\ReportViolationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Citizen\SendAppealWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Citizen\StatisticsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Citizen\ViewViolationsView.xaml.cs">
