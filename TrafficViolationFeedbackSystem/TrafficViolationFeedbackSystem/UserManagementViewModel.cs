@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TrafficViolationFeedbackSystem.Models;
@@ -12,8 +10,11 @@ namespace TrafficViolationFeedbackSystem
 {
     public class UserManagementViewModel : BaseViewModel
     {
+        private ObservableCollection<User> _allUsers;
         private ObservableCollection<User> _users;
         private User _selectedUser;
+        private string _filterFullName;
+
         public ObservableCollection<User> Users
         {
             get => _users;
@@ -31,21 +32,35 @@ namespace TrafficViolationFeedbackSystem
             {
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
-                OnPropertyChanged(nameof(IsUserSelected)); 
+                OnPropertyChanged(nameof(IsUserSelected));
             }
         }
 
         public bool IsUserSelected => SelectedUser != null;
 
+        public string FilterFullName
+        {
+            get => _filterFullName;
+            set
+            {
+                _filterFullName = value;
+                OnPropertyChanged(nameof(FilterFullName));
+            }
+        }
+
         public ICommand CreateCommand { get; }
         public ICommand UpdateCommand { get; }
         public ICommand DeleteCommand { get; }
+        public ICommand FilterCommand { get; }
+        public ICommand ResetFilterCommand { get; }
 
         public UserManagementViewModel()
         {
             CreateCommand = new RelayCommand(Create);
             UpdateCommand = new RelayCommand(Update, CanUpdate);
             DeleteCommand = new RelayCommand(Delete, CanDelete);
+            FilterCommand = new RelayCommand(Filter, CanFilter);
+            ResetFilterCommand = new RelayCommand(ResetFilter, CanResetFilter);
             LoadUsers();
         }
 
@@ -55,7 +70,7 @@ namespace TrafficViolationFeedbackSystem
             {
                 using (var context = new TrafficViolationFeedbackSystemContext())
                 {
-                    Users = new ObservableCollection<User>(
+                    _allUsers = new ObservableCollection<User>(
                         context.Users
                             .Select(u => new User
                             {
@@ -69,17 +84,17 @@ namespace TrafficViolationFeedbackSystem
                             })
                             .ToList()
                     );
+                    Users = new ObservableCollection<User>(_allUsers);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Errorr Load: {ex.Message}", "Errorr", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error Load: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void Create(object parameter)
         {
-            // Điều hướng sang UserCreateView
             var mainWindow = Application.Current.MainWindow?.DataContext as MainViewModel;
             if (mainWindow != null)
             {
@@ -87,6 +102,7 @@ namespace TrafficViolationFeedbackSystem
                 mainWindow.ImageVisibility = false;
             }
         }
+
         private bool CanUpdate(object parameter)
         {
             return SelectedUser != null;
@@ -113,7 +129,6 @@ namespace TrafficViolationFeedbackSystem
         {
             if (SelectedUser == null) return;
 
-            // Hiển thị thông báo xác nhận
             MessageBoxResult result = MessageBox.Show(
                 $"Bạn có chắc chắn muốn xóa người dùng với ID {SelectedUser.UserId} - {SelectedUser.FullName}?",
                 "Xác nhận xóa",
@@ -132,9 +147,8 @@ namespace TrafficViolationFeedbackSystem
                             context.Users.Remove(userToDelete);
                             context.SaveChanges();
 
-                            // Làm mới danh sách Users
                             LoadUsers();
-                            SelectedUser = null; // Xóa lựa chọn sau khi xóa
+                            SelectedUser = null;
                             MessageBox.Show("Người dùng đã được xóa thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
@@ -150,5 +164,55 @@ namespace TrafficViolationFeedbackSystem
             }
         }
 
+        private bool CanFilter(object parameter)
+        {
+            return true;
+        }
+
+        private void Filter(object parameter)
+        {
+            try
+            {
+                if (_allUsers == null || !_allUsers.Any())
+                {
+                    MessageBox.Show("No data available to filter.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(FilterFullName))
+                {
+                    MessageBox.Show("Bạn chưa nhập tên người dùng.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                var filtered = _allUsers
+                    .Where(u => u.FullName != null && u.FullName.Contains(FilterFullName ?? "", StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                if (filtered.Any())
+                {
+                    Users = new ObservableCollection<User>(filtered);
+                }
+                else
+                {
+                    Users = new ObservableCollection<User>();
+                    MessageBox.Show("No users found for the given name.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error filtering users: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private bool CanResetFilter(object parameter)
+        {
+            return true;
+        }
+
+        private void ResetFilter(object parameter)
+        {
+            FilterFullName = string.Empty;
+            Users = new ObservableCollection<User>(_allUsers ?? new ObservableCollection<User>());
+        }
     }
 }

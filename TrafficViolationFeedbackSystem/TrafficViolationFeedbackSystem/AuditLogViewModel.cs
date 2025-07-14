@@ -35,7 +35,7 @@ namespace TrafficViolationFeedbackSystem
                 {
                     AuditLogs = new ObservableCollection<AuditLog>(
                         context.AuditLogs
-                            .AsNoTracking() // Tối ưu hiệu suất
+                            .AsNoTracking() 
                             .Include(log => log.User) // Lấy User.FullName
                             .Where(log => log.User != null) // Đảm bảo User không null
                             .OrderByDescending(log => log.Timestamp) // Sắp xếp theo Timestamp giảm dần

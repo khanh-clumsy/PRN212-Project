@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" d:DesignHeight="360.439" d:DesignWidth="988.74">
-    <Grid Margin="10">
+    <Grid d:DesignHeight="450" d:DesignWidth="1000">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -13,7 +13,7 @@
         <!-- Tiêu đề -->
         <TextBlock Grid.Row="0" Text="Activity Logs" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        <!-- DataGrid for Audit Logs -->
+        
         <DataGrid Grid.Row="1" ItemsSource="{Binding AuditLogs}" AutoGenerateColumns="False"
                   CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
             <DataGrid.Columns>

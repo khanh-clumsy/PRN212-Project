@@ -4,57 +4,120 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid Margin="20">
+        <Border Background="#F5F7FA" CornerRadius="10" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-        <!-- Tiêu đề -->
-        <TextBlock Grid.Row="0" Text="Update User" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+                <!-- Tiêu đề -->
+                <TextBlock Grid.Row="0" Text="Update User" FontSize="28" FontWeight="Bold" 
+                           Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="#2C3E50"/>
 
-        <!-- User ID -->
-        <TextBlock Grid.Row="1" Text="User ID:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="1" Margin="100,0,0,10" Width="300" Text="{Binding UpdatedUser.UserId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+                <!-- User ID -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="User ID:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding UpdatedUser.UserId, UpdateSourceTrigger=PropertyChanged}" 
+                             IsEnabled="False" Background="#ECF0F1" BorderBrush="#BDC3C7" />
+                </Grid>
 
-        <!-- FullName -->
-        <TextBlock Grid.Row="2" Text="Full Name:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="2" Margin="100,0,0,10" Width="300" Text="{Binding UpdatedUser.FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- FullName -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Full Name:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding UpdatedUser.FullName, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7" />
+                </Grid>
 
-        <!-- Email -->
-        <TextBlock Grid.Row="3" Text="Email:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="3" Margin="100,0,0,10" Width="300" Text="{Binding UpdatedUser.Email, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Email -->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Email:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding UpdatedUser.Email, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7" />
+                </Grid>
 
-        <!-- Password -->
-        <TextBlock Grid.Row="4" Text="Password:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="4" Margin="100,0,0,10" Width="300" Text="{Binding UpdatedUser.Password, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Password -->
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Password:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding UpdatedUser.Password, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7" />
+                </Grid>
 
-        <!-- Phone -->
-        <TextBlock Grid.Row="5" Text="Phone:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="5" Margin="100,0,0,10" Width="300" Text="{Binding UpdatedUser.Phone, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Phone -->
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Phone:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding UpdatedUser.Phone, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7" />
+                </Grid>
 
-        <!-- Address -->
-        <TextBlock Grid.Row="6" Text="Address:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="6" Margin="100,0,0,10" Width="300" Text="{Binding UpdatedUser.Address, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Address -->
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Address:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding UpdatedUser.Address, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7" />
+                </Grid>
 
-        <!-- Role -->
-        <TextBlock Grid.Row="7" Text="Role:" VerticalAlignment="Center"/>
-        <ComboBox Grid.Row="7" x:Name="RoleComboBox" Margin="100,0,0,10" Width="300"
-                  SelectedValue="{Binding UpdatedUser.Role, UpdateSourceTrigger=PropertyChanged}" 
-                  SelectedValuePath="Tag">
-            <ComboBoxItem Content="Citizen" Tag="Citizen"/>
-            <ComboBoxItem Content="TrafficPolice" Tag="TrafficPolice"/>
-            <ComboBoxItem Content="Admin" Tag="Admin"/>
-        </ComboBox>
+                <!-- Role -->
+                <Grid Grid.Row="7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Role:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <ComboBox Grid.Column="1" Margin="0,5,0,5" Width="300" 
+                              SelectedValue="{Binding UpdatedUser.Role, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedValuePath="Tag" Background="#FFFFFF" BorderBrush="#BDC3C7" >
+                        <ComboBoxItem Content="Citizen" Tag="Citizen"/>
+                        <ComboBoxItem Content="TrafficPolice" Tag="TrafficPolice"/>
+                        <ComboBoxItem Content="Admin" Tag="Admin"/>
+                    </ComboBox>
+                </Grid>
 
-        <!-- Update Button -->
-        <Button Grid.Row="8" Content="Update" Margin="0,20,0,0" Padding="10,2" 
-                Command="{Binding UpdateCommand}" HorizontalAlignment="Right" Width="100"/>
+                <!-- Update Button -->
+                <Button Grid.Row="8" Content="Update" Margin="0,20,20,0" Padding="15,5" 
+                        Command="{Binding UpdateCommand}" HorizontalAlignment="Right" Width="120" Background="#2ECC71" 
+                        Foreground="White" BorderThickness="0" >
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

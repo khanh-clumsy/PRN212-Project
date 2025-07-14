@@ -4,51 +4,113 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
-    <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid Margin="20">
+        <Border Background="#F5F7FA" CornerRadius="10" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Tiêu đề -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- FullName -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Email -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Password -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Phone -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Address -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Role -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Submit Button -->
+                </Grid.RowDefinitions>
 
-        <!-- Tiêu đề -->
-        <TextBlock Grid.Row="0" Text="Create New User" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+                <!-- Tiêu đề -->
+                <TextBlock Grid.Row="0" Text="Create New User" FontSize="28" FontWeight="Bold" 
+                           Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="#2C3E50"/>
 
-        <!-- FullName -->
-        <TextBlock Grid.Row="1" Text="Full Name:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="1" Margin="100,0,0,10" Width="300" Text="{Binding NewUser.FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- FullName -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Full Name:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding NewUser.FullName, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7"/>
+                </Grid>
 
-        <!-- Email -->
-        <TextBlock Grid.Row="2" Text="Email:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="2" Margin="100,0,0,10" Width="300" Text="{Binding NewUser.Email, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Email -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Email:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding NewUser.Email, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7"/>
+                </Grid>
 
-        <!-- Password -->
-        <TextBlock Grid.Row="3" Text="Password:" VerticalAlignment="Center"/>
-        <PasswordBox Grid.Row="3" Margin="100,0,0,10" Width="300" x:Name="PasswordBox" 
-                     PasswordChanged="PasswordBox_PasswordChanged" />
+                <!-- Password -->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Password:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <PasswordBox Grid.Column="1" Margin="0,5,0,5" Width="300" x:Name="PasswordBox" 
+                                 PasswordChanged="PasswordBox_PasswordChanged" Background="#FFFFFF" BorderBrush="#BDC3C7"/>
+                </Grid>
 
-        <!-- Phone -->
-        <TextBlock Grid.Row="4" Text="Phone:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="4" Margin="100,0,0,10" Width="300" Text="{Binding NewUser.Phone, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Phone -->
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Phone:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding NewUser.Phone, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7"/>
+                </Grid>
 
-        <!-- Address -->
-        <TextBlock Grid.Row="5" Text="Address:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="5" Margin="100,0,0,10" Width="300" Text="{Binding NewUser.Address, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Address -->
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Address:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <TextBox Grid.Column="1" Margin="0,5,0,5" Width="300" Text="{Binding NewUser.Address, UpdateSourceTrigger=PropertyChanged}" 
+                             Background="#FFFFFF" BorderBrush="#BDC3C7"/>
+                </Grid>
 
-        <!-- Role -->
-        <TextBlock Grid.Row="6" Text="Role:" VerticalAlignment="Center"/>
-        <ComboBox Grid.Row="6" Margin="100,0,0,10" Width="300" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem Content="Citizen" Tag="Citizen"/>
-             <ComboBoxItem Content="TrafficPolice" Tag="TrafficPolice"/>
-             <ComboBoxItem Content="Admin" Tag="Admin"/>
-        </ComboBox>
+                <!-- Role -->
+                <Grid Grid.Row="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Role:" VerticalAlignment="Center" FontSize="16" 
+                               Margin="0,5,10,5" Foreground="#34495E"/>
+                    <ComboBox Grid.Column="1" Margin="0,5,0,5" Width="300" SelectionChanged="ComboBox_SelectionChanged" 
+                              Background="#FFFFFF" BorderBrush="#BDC3C7">
+                        <ComboBoxItem Content="Citizen" Tag="Citizen"/>
+                        <ComboBoxItem Content="TrafficPolice" Tag="TrafficPolice"/>
+                        <ComboBoxItem Content="Admin" Tag="Admin"/>
+                    </ComboBox>
+                </Grid>
 
-        <!-- Submit Button -->
-        <Button Grid.Row="7" Content="Submit" Margin="0,20,0,0" Padding="10,2" 
-                Command="{Binding SubmitCommand}" HorizontalAlignment="Right" Width="100"/>
+                <!-- Submit Button -->
+                <Button Grid.Row="7" Content="Submit" Margin="0,20,0,0" Padding="10,2" 
+                Command="{Binding SubmitCommand}" HorizontalAlignment="Right" Width="100" 
+                Background="#2ECC71" />
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

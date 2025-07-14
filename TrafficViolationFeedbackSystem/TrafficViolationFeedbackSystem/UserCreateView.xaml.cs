@@ -29,8 +29,7 @@ namespace TrafficViolationFeedbackSystem
         {
             if (DataContext is UserCreateViewModel viewModel)
             {
-                viewModel.NewUser.Password = (sender as PasswordBox)?.Password ?? string.Empty;
-                //viewModel.OnPropertyChanged(nameof(viewModel.NewUser)); // Thông báo thay đổi cho Password               
+                viewModel.NewUser.Password = (sender as PasswordBox)?.Password ?? string.Empty;            
                 CommandManager.InvalidateRequerySuggested(); // Đảm bảo CanExecute được gọi lại
             }
         }
@@ -39,8 +38,7 @@ namespace TrafficViolationFeedbackSystem
             if (DataContext is UserCreateViewModel viewModel && sender is ComboBox comboBox)
             {
                 var selectedItem = comboBox.SelectedItem as ComboBoxItem;
-                viewModel.NewUser.Role = selectedItem?.Tag?.ToString();
-                //viewModel.OnPropertyChanged(nameof(viewModel.NewUser)); // Thông báo thay đổi cho NewUser
+                viewModel.NewUser.Role = selectedItem?.Tag?.ToString();           
                 CommandManager.InvalidateRequerySuggested(); // Đảm bảo CanExecute được gọi lại
             }
         }

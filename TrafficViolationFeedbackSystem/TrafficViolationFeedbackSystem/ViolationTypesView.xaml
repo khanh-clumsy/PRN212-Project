@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
-    <Grid Height="405" Width="1000">
+    <Grid d:DesignHeight="450" d:DesignWidth="1000">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -13,11 +13,11 @@
         <!-- Header và các nút -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
             <TextBlock Text="Manage Violation Types" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
-            <Button Content="Create" Margin="10,0,0,0" Padding="10,2" Command="{Binding CreateCommand}" 
+            <Button Content="➕ Create" Margin="10,0,0,0" Padding="10,2" Command="{Binding CreateCommand}" 
                     Background="#4CAF50" Foreground="White" BorderThickness="0"/>
-            <Button Content="Update" Margin="10,0,0,0" Padding="10,2" Command="{Binding UpdateCommand}" 
+            <Button Content="✏️ Update" Margin="10,0,0,0" Padding="10,2" Command="{Binding UpdateCommand}" 
                     Background="#FF9800" Foreground="White" BorderThickness="0" IsEnabled="{Binding IsViolationTypeSelected}"/>
-            <Button Content="Delete" Margin="10,0,0,0" Padding="10,2" Command="{Binding DeleteCommand}" 
+            <Button Content="🗑️ Delete" Margin="10,0,0,0" Padding="10,2" Command="{Binding DeleteCommand}" 
                     Background="#F44336" Foreground="White" BorderThickness="0" IsEnabled="{Binding IsViolationTypeSelected}"/>
         </StackPanel>
 

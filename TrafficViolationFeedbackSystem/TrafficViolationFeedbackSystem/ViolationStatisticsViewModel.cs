@@ -100,7 +100,7 @@ namespace TrafficViolationFeedbackSystem
                 else
                 {
                     Violations = new ObservableCollection<Violation>();
-                    MessageBox.Show("No violations found for the given plate number.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Không có vi phạm nào được tìm thấy theo biển số .", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
