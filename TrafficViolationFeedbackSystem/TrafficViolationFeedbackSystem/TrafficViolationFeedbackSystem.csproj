@@ -42,7 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Assets\Image\Report\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\TrafficPolice\" />
   </ItemGroup>
 
 </Project>

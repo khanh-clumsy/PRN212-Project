@@ -198,6 +198,18 @@ namespace TrafficViolationFeedbackSystem.DAO
                 .Select(v => v.Owner)
                 .FirstOrDefaultAsync();
         }
+        public string GetVehicleOwnerNameByPlateNumber(string plateNumber)
+        {
+            if (string.IsNullOrWhiteSpace(plateNumber))
+            {
+                return null;
+            }
+            return _context.Vehicles
+                .Include(v => v.Owner)
+                .Where(v => v.PlateNumber == plateNumber)
+                .Select(v => v.Owner.FullName)
+                .FirstOrDefault();
+        }
 
         private string HashPassword(string password)
         {

@@ -1,14 +1,15 @@
 ﻿<Application x:Class="TrafficViolationFeedbackSystem.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:TrafficViolationFeedbackSystem"
+             xmlns:local="clr-namespace:TrafficViolationFeedbackSystem" 
+             xmlns:serv="clr-namespace:TrafficViolationFeedbackSystem.Services"
              >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Assets/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <serv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
-
 </Application>
