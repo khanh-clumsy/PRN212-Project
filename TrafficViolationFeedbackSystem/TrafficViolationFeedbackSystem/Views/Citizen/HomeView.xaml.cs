@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrafficViolationFeedbackSystem.Data;
 
 namespace TrafficViolationFeedbackSystem.Views.Citizen
 {
@@ -20,16 +21,18 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     /// </summary>
     public partial class HomeView : UserControl
     {
+        private readonly TrafficViolationFeedbackSystemContext _context;
         private readonly Action<UserControl> setContent;
 
-        public HomeView(Action<UserControl> setContent)
+        public HomeView(Action<UserControl> setContent, TrafficViolationFeedbackSystemContext context)
         {
             InitializeComponent();
+            _context = context;
             this.setContent = setContent;
         }
         private void btnReportViolation_Click(object sender, RoutedEventArgs e)
         {
-            setContent?.Invoke(new ReportViolationView());
+            setContent?.Invoke(new ReportViolationView(_context));
         }
 
         private void btnViewFeedback_Click(object sender, RoutedEventArgs e)

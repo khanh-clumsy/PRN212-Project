@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TrafficViolationFeedbackSystem.Data;
+using TrafficViolationFeedbackSystem.Services;
 using TrafficViolationFeedbackSystem.Views.Authentication;
 
 namespace TrafficViolationFeedbackSystem.Views.Citizen
@@ -20,13 +22,15 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     /// </summary>
     public partial class CitizenDashboardWindow : Window
     {
+        private readonly TrafficViolationFeedbackSystemContext _context = new TrafficViolationFeedbackSystemContext(); 
         public CitizenDashboardWindow()
         {
             InitializeComponent();
             var btn = btnHome;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
-            MainContent.Content = new HomeView(SetContent);
+            SetContent(new HomeView(SetContent, _context));
+            MessageBox.Show($"Chào mừng bạn đến với Dashboard của Citizen! ID user: {AuthenticationContext.UserId}", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void SetContent(UserControl view)
@@ -50,7 +54,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             var btn = sender as Button;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
-            SetContent(new HomeView(SetContent));
+            SetContent(new HomeView(SetContent, _context));
         }
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
