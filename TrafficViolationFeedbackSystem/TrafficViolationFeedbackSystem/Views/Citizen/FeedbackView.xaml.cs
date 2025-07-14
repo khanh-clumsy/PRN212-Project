@@ -32,7 +32,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
         private void LoadAppeals()
         {
             var dao = new AppealDAO();
-            var data = dao.GetAppealsByUser(userId);
+            var data = dao.GetAppealsByUser(1);
             dgAppeals.ItemsSource = data;
         }
 
@@ -58,9 +58,10 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                 return;
             }
 
-            // Hiển thị form chỉnh sửa
-            var editWindow = new SendAppealWindow(appeal); // constructor có thể truyền dữ liệu
+            //Hiển thị form chỉnh sửa
+            var editWindow = new SendAppealWindow(appeal.ViolationId, appeal.ViolatorId, appeal.AppealId, appeal.Content);
             editWindow.ShowDialog();
+
 
             // Sau khi sửa xong → load lại
             LoadAppeals();

@@ -81,6 +81,15 @@ namespace TrafficViolationFeedbackSystem.DAO
             _context.SaveChanges();
             return true;
         }
+        public bool UpdateAppeal(int appealId, string newContent)
+        {
+            var appeal = _context.Appeals.Find(appealId);
+            if (appeal == null) return false;
+
+            appeal.Content = newContent;
+            _context.SaveChanges();
+            return true;
+        }
 
     }
 }

@@ -23,6 +23,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     {
         private int _violationId;
         private int _userId;
+        private readonly int? _appealId;
         public SendAppealWindow(int violationId, int userId)
         {
             InitializeComponent();
@@ -32,43 +33,55 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             string summary = appealDAO.GetViolationSummary(_violationId);
             txtSummary.Text = summary;
         }
-
+        public SendAppealWindow(int violationId, int userId, int appealId, string existingContent)
+        {
+            InitializeComponent();
+            _violationId = violationId;
+            _userId = userId;
+            _appealId = appealId;
+            txtContent.Text = existingContent;
+        }
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             string content = txtContent.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(content))
             {
-                MessageBox.Show("Vui lòng nhập nội dung kháng cáo!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng nhập nội dung kháng cáo!");
                 return;
             }
 
-            var appealDAO = new AppealDAO();
-            if (appealDAO.AppealExists(_violationId))
+            var dao = new AppealDAO();
+
+            // ❗Chỉ check tồn tại nếu đang thêm mới
+            if (_appealId == null && dao.AppealExists(_violationId))
             {
-                MessageBox.Show("Bạn đã gửi kháng cáo cho vi phạm này rồi!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Bạn đã gửi kháng cáo cho vi phạm này rồi!");
                 return;
             }
-            var appeal = new Appeal
-            {
-                ViolationId = _violationId,
-                ViolatorId = _userId,
-                Content = content,
-                SubmitDate = DateTime.Now
-            };
 
-            bool success = appealDAO.AddAppeal(appeal);
-
-            if (success)
+            if (_appealId != null)
             {
-                MessageBox.Show("Đã gửi kháng cáo thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close();
+                // Cập nhật nội dung kháng cáo
+                dao.UpdateAppeal(_appealId.Value, content); // bạn chỉ cần thêm 1 hàm Update
             }
             else
             {
-                MessageBox.Show("Gửi kháng cáo thất bại. Vui lòng thử lại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Thêm mới
+                var appeal = new Appeal
+                {
+                    ViolationId = _violationId,
+                    ViolatorId = _userId,
+                    Content = content,
+                    SubmitDate = DateTime.Now
+                };
+                dao.AddAppeal(appeal);
             }
+
+            MessageBox.Show("Kháng cáo đã được lưu!");
+            this.Close();
         }
+
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
