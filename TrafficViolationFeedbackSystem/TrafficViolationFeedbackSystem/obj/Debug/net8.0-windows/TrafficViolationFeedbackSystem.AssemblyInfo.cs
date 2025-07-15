@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TrafficViolationFeedbackSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ceb0e1bd521186d64af5080e7b125ab42812dac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f311c99367ab443a5c3b08f75eafa094252e2b74")]
 [assembly: System.Reflection.AssemblyProductAttribute("TrafficViolationFeedbackSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TrafficViolationFeedbackSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
