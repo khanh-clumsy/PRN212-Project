@@ -7,7 +7,7 @@ public partial class Fine
 {
     public int FineId { get; set; }
 
-    public int? ViolationId { get; set; }
+    public int ViolationId { get; set; }
 
     public string? PaymentMethod { get; set; }
 
@@ -17,5 +17,5 @@ public partial class Fine
 
     public bool? IsConfirmed { get; set; }
 
-    public virtual Violation? Violation { get; set; }
+    public virtual Violation Violation { get; set; } = null!;
 }

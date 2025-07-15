@@ -1,0 +1,9 @@
+﻿<Window x:Class="TrafficViolationFeedbackSystem.Views.User.AttachmentPreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Xem file đính kèm" Height="400" Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <ContentControl x:Name="contentHolder"/>
+    </Grid>
+</Window>
