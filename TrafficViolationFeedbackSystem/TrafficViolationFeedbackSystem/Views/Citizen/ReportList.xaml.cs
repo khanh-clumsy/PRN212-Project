@@ -19,11 +19,11 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     /// <summary>
     /// Interaction logic for FeedbackView.xaml
     /// </summary>
-    public partial class FeedbackView : UserControl
+    public partial class ReportList : UserControl
     {
         private int userId = 1;
 
-        public FeedbackView()
+        public ReportList()
         {
             InitializeComponent();
             LoadAppeals();
@@ -32,8 +32,8 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
         private void LoadAppeals()
         {
             var dao = new AppealDAO();
-            var data = dao.GetAppealsByUser(1);
-            dgAppeals.ItemsSource = data;
+            var data = dao.GetAppealsByUser(userId);
+            this.dgAppeals.ItemsSource = data;
         }
 
         private void EditAppeal_Click(object sender, RoutedEventArgs e)
