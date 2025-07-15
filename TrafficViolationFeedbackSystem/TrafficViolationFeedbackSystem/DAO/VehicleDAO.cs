@@ -38,6 +38,16 @@ namespace TrafficViolationFeedbackSystem.DAO
                            .Where(v => v.PlateNumber.ToLower().Contains(plateNumber))
                            .ToList();
         }
+        public void InsertVehicle(Vehicle vehicle)
+        {
+            _context.Vehicles.Add(vehicle);
+            _context.SaveChanges();
+        }
+        public void UpdateVehicle(Vehicle vehicle)
+        {
+            _context.Vehicles.Update(vehicle);
+            _context.SaveChanges();
+        }
         public void DeleteVehicle(int vehicleId)
         {
             var vehicle = _context.Vehicles.Find(vehicleId);
@@ -46,6 +56,13 @@ namespace TrafficViolationFeedbackSystem.DAO
                 _context.Vehicles.Remove(vehicle);
                 _context.SaveChanges();
             }
+        }
+        public Vehicle? GetVehicleById(int vehicleId)
+        {
+            using var context = new TrafficViolationFeedbackSystemContext();
+            return context.Vehicles
+                          .Include(v => v.Owner)
+                          .FirstOrDefault(v => v.VehicleId == vehicleId);
         }
 
     }

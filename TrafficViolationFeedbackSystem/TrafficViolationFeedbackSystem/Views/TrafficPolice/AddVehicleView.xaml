@@ -6,12 +6,64 @@
              xmlns:local="clr-namespace:TrafficViolationFeedbackSystem.Views.TrafficPolice"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="➕ Thêm phương tiện (placeholder)"
-                   FontSize="30"
-                   FontWeight="Bold"
-                   Foreground="#007BFF"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
-    </Grid>
-</UserControl> 
+    <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="20" Margin="40">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock x:Name="FormTitle"
+                       Text="➕ Thêm phương tiện"
+                       FontSize="26"
+                       FontWeight="Bold"
+                       Foreground="#007BFF"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <!-- Form Fields -->
+            <Grid Grid.Row="1" Margin="0,0,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Plate Number -->
+                <TextBlock Text="Biển số:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox x:Name="PlateBox" Grid.Row="0" Grid.Column="1" Height="30" Margin="0,5"/>
+
+                <!-- Brand -->
+                <TextBlock Text="Hãng xe:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox x:Name="BrandBox" Grid.Row="1" Grid.Column="1" Height="30" Margin="0,5"/>
+
+                <!-- Model -->
+                <TextBlock Text="Dòng xe:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox x:Name="ModelBox" Grid.Row="2" Grid.Column="1" Height="30" Margin="0,5"/>
+
+                <!-- Year -->
+                <TextBlock Text="Năm sản xuất:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox x:Name="YearBox" Grid.Row="3" Grid.Column="1" Height="30" Margin="0,5"/>
+
+                <!-- Owner -->
+                <TextBlock Text="Chủ sở hữu (email):" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5"/>
+                <ComboBox x:Name="OwnerComboBox" Grid.Row="4" Grid.Column="1" 
+                          Height="30" DisplayMemberPath="Email" Margin="0,5"/>
+            </Grid>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button Content="💾 Lưu" Width="120" Margin="8,0" Click="SaveButton_Click"/>
+                <Button Content="❌ Hủy" Width="120" Margin="8,0" Click="CancelButton_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,16 +1,22 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Microsoft.EntityFrameworkCore;
+using System.Windows.Navigation;
 using TrafficViolationFeedbackSystem.DAO;
 
 namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
 {
     public partial class VehicleListView : UserControl
     {
+        private readonly Data.TrafficViolationFeedbackSystemContext _context;
+
         public VehicleListView(Data.TrafficViolationFeedbackSystemContext context)
         {
             InitializeComponent();
+            _context = context;
             LoadAllVehicles();
         }
+
         private void LoadAllVehicles()
         {
             var dao = new VehicleDAO();
@@ -30,12 +36,26 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            if (button?.Tag is int vehicleId)
+            if (sender is Button button && button.Tag is int vehicleId)
             {
-                MessageBox.Show($"Sửa phương tiện có ID = {vehicleId}");
+                var dao = new VehicleDAO();
+                var vehicle = dao.GetVehicleById(vehicleId);
+                if (vehicle != null)
+                {
+                    var editPopup = new EditVehicleView(_context, vehicle)
+                    {
+                        Owner = Application.Current.MainWindow
+                    };
+
+                    if (editPopup.ShowDialog() == true)
+                    {
+                        LoadAllVehicles(); // Refresh lại grid sau khi sửa
+                    }
+                }
             }
         }
+
+
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
