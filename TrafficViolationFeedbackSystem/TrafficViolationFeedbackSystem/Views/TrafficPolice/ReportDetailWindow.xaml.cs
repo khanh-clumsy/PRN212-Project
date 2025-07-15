@@ -16,6 +16,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
     {
         private readonly TrafficViolationFeedbackSystemContext _context = new TrafficViolationFeedbackSystemContext();
         private readonly int _reportId;
+        private Attachment _firstAttachment;
         public ReportDetailWindow(int reportId)
         {
             InitializeComponent();
@@ -24,6 +25,21 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         }
         private void LoadDetail()
         {
+            var attachments = _context.Attachments
+                .Where(a => a.ReportId == _reportId)
+                .ToList();
+
+            if (attachments.Any())
+            {
+                _firstAttachment = attachments.First(); // lưu lại để dùng
+                txtAttachmentName.Text = attachments.First().FilePath;
+            }
+            else
+            {
+                txtAttachmentName.Text = "Không có file đính kèm";
+                btnViewSingleAttachment.IsEnabled = false;
+            }
+
             var report = _context.Reports.Include(r => r.ViolationType).FirstOrDefault(r => r.ReportId == _reportId);
             if (report == null) { this.Close(); return; }
             txtReportId.Text = $"Mã phản ánh: {report.ReportId}";
@@ -39,16 +55,23 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                 "Rejected" => "Từ chối",
                 _ => "Không xác định"
             }}";
-            var attachments = _context.Attachments.Where(a => a.ReportId == _reportId).ToList();
-            lstAttachments.ItemsSource = attachments;
+
         }
-        private void btnViewAttachment_Click(object sender, RoutedEventArgs e)
+        public void btnViewSingleAttachment_Click(object sender, RoutedEventArgs e)
         {
-            if (lstAttachments.SelectedItem is Attachment att && !string.IsNullOrEmpty(att.FilePath))
+            if (_firstAttachment != null && !string.IsNullOrEmpty(_firstAttachment.FilePath))
             {
-                var previewWindow = new AttachmentPreviewWindow(att.FilePath);
-                previewWindow.ShowDialog();
+                string fullPath = Path.Combine(AppContext.BaseDirectory, "Assets", "Image", "Report", _firstAttachment.FilePath);
+
+                if (!File.Exists(fullPath))
+                {
+                    MessageBox.Show("Tệp không tồn tại: " + fullPath, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                var preview = new AttachmentPreviewWindow(fullPath);
+                preview.ShowDialog();
             }
         }
     }
-} 
+}

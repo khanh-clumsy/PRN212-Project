@@ -29,7 +29,6 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
         {
             InitializeComponent();
             _context = new TrafficViolationFeedbackSystemContext();
-
             ShowLoginView();
         }
 
@@ -53,7 +52,23 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
         {
             var forgotPasswordView = new ForgotPasswordView(_context);
             forgotPasswordView.ShowLoginView = ShowLoginView;
+            forgotPasswordView.ShowVerifyCode = ShowVerifyCodeView; // tiếp tục sang bước 2
             MainContent.Content = forgotPasswordView;
+        }
+        private void ShowVerifyCodeView(string email)
+        {
+            var verifyCodeView = new VerifyCodeView(email);
+            verifyCodeView.ShowResetPasswordView = ShowResetPasswordView; // tiếp tục sang bước 3
+            verifyCodeView.ShowLoginView = ShowLoginView;
+            MainContent.Content = verifyCodeView;
+        }
+
+        private void ShowResetPasswordView(string email)
+        {
+            var resetPasswordView = new ResetPasswordView(email);
+            resetPasswordView.OnResetPasswordSuccess = ShowLoginView;
+            resetPasswordView.ShowLoginView = ShowLoginView;
+            MainContent.Content = resetPasswordView;
         }
 
         /// <summary>

@@ -54,13 +54,17 @@ namespace TrafficViolationFeedbackSystem.DAO
                 var allowedExts = new[] { ".jpg", ".jpeg", ".png", ".mp4" };
 
                 if (!allowedExts.Contains(ext))
+                {
                     MessageBox.Show("Chỉ hỗ trợ ảnh (.jpg, .jpeg, .png) và video (.mp4)");
-
+                    return;
+                }
                 // Kiểm tra dung lượng file
                 FileInfo fileInfo = new FileInfo(filePath);
-                if (fileInfo.Length > 5 * 1024 * 1024) // > 5MB
+                if (fileInfo.Length > 5 * 1024 * 1024)
+                {  // > 5MB
                     MessageBox.Show("File vượt quá kích thước cho phép (tối đa 5MB)");
-
+                    return;
+                }
                 string fileName = Guid.NewGuid().ToString() + Path.GetExtension(filePath);
                 string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Image", "Report");
 

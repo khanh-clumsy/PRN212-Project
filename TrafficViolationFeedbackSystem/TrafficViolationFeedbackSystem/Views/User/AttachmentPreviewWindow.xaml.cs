@@ -25,13 +25,6 @@ namespace TrafficViolationFeedbackSystem.Views.User
 
             string fullPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Assets", "Image", "Report", fileName);
 
-            if (!File.Exists(fullPath))
-            {
-                MessageBox.Show("File không tồn tại: " + fullPath, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
-                return;
-            }
-
             string ext = System.IO.Path.GetExtension(fileName).ToLower();
 
             if (ext == ".jpg" || ext == ".jpeg" || ext == ".png")

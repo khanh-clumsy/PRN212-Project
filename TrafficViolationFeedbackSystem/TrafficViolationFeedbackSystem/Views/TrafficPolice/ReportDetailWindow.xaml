@@ -18,16 +18,10 @@
             <TextBlock x:Name="txtStatus"/>
         </StackPanel>
         <GroupBox Header="File đính kèm" Grid.Row="1">
-            <ListBox x:Name="lstAttachments">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding FilePath}" Width="300"/>
-                            <Button Content="Xem" Margin="10,0,0,0" Click="btnViewAttachment_Click"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                <TextBlock x:Name="txtAttachmentName" FontWeight="Bold" Margin="0,0,10,0"/>
+                <Button x:Name="btnViewSingleAttachment" Content="Xem" Click="btnViewSingleAttachment_Click"/>
+            </StackPanel>
         </GroupBox>
     </Grid>
 </Window> 

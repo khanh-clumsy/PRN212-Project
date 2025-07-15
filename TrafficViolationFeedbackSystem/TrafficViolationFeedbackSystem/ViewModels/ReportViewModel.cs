@@ -9,6 +9,7 @@ namespace TrafficViolationFeedbackSystem.ViewModels
     public class ReportViewModel
     {
         public int ReportId { get; set; }
+        public int ReportedId { get; set; }
         public string PlateNumber { get; set; }
         public string ViolationTypeName { get; set; }
         public string OwnerName { get; set; }
