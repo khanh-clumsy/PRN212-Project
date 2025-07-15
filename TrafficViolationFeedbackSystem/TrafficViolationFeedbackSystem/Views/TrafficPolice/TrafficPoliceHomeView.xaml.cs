@@ -22,5 +22,13 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         {
             setContent?.Invoke(new ViewAppealsView());
         }
+        private void btnAddVehicle_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            setContent?.Invoke(new AddVehicleView(_context));
+        }
+        private void btnViewVehicles_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            setContent?.Invoke(new VehicleListView(_context));
+        }
     }
 } 

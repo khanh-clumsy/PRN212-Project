@@ -29,10 +29,10 @@
         Style="{StaticResource ModernButton}"
         Click="btnViewMyViolations_Click"/>
 
-        <Button Content="📩 Xem phản hồi vi phạm"
+        <Button Content="📩 Xem phản ánh đã gửi"
         Grid.Row="0" Grid.Column="2"
         Style="{StaticResource ModernButton}"
-        Click="btnViewFeedback_Click"/>
+        Click="btnViewReportList_Click"/>
 
         <!-- Hàng 2 -->
         <Button Content="⚖️ Phản hồi/Kháng cáo"

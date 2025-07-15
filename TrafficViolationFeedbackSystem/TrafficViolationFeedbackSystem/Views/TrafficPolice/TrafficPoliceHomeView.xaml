@@ -29,5 +29,19 @@
                 Width="320" Height="120"
                 Margin="20"
                 Click="btnViewAppeals_Click"/>
+        <Button Content="➕ Thêm phương tiện"
+                Grid.Row="1" Grid.Column="0"
+                Style="{StaticResource ModernButton}"
+                FontSize="22"
+                Width="320" Height="120"
+                Margin="20"
+                Click="btnAddVehicle_Click"/>
+        <Button Content="🚗 Xem danh sách phương tiện"
+                Grid.Row="1" Grid.Column="1"
+                Style="{StaticResource ModernButton}"
+                FontSize="22"
+                Width="320" Height="120"
+                Margin="20"
+                Click="btnViewVehicles_Click"/>
     </Grid>
 </UserControl> 
