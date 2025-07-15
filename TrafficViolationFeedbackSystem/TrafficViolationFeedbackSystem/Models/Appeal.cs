@@ -17,6 +17,8 @@ public partial class Appeal
 
     public string? Result { get; set; }
 
+    public string ResultText => string.IsNullOrEmpty(Result) ? "Đang xử lý" : Result;
+
     public virtual Violation Violation { get; set; } = null!;
 
     public virtual User Violator { get; set; } = null!;

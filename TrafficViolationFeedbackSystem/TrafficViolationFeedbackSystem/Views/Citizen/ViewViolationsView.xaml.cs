@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrafficViolationFeedbackSystem.DAO;
 
 namespace TrafficViolationFeedbackSystem.Views.Citizen
 {
@@ -23,6 +24,24 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
         public ViewViolationsView()
         {
             InitializeComponent();
+            loadViolationView();
         }
+
+        void loadViolationView()
+        {
+            ViolationDAO dao = new ViolationDAO();
+            var violation = dao.GetViolationsForUser(1);
+            this.dgViolations.ItemsSource = violation;
+        }
+        private void AppealButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is int violationId)
+            {
+                var win = new SendAppealWindow(violationId,1);
+                win.Owner = Window.GetWindow(this);
+                win.ShowDialog();
+            }
+        }
+
     }
 }
