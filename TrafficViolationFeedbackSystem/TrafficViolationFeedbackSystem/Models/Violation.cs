@@ -16,7 +16,9 @@ public partial class Violation
     public DateTime? FineDate { get; set; }
 
     public bool? PaidStatus { get; set; }
-    public string PaidStatusText => PaidStatus == true ? "Đã nộp" : "Chưa nộp";
+
+    public bool? IsCancelled { get; set; }
+
     public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();
 
     public virtual ICollection<Fine> Fines { get; set; } = new List<Fine>();
