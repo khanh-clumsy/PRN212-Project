@@ -67,11 +67,7 @@ namespace TrafficViolationFeedbackSystem
                 case "ViolationType":
                     CurrentView = new ViolationTypesView { DataContext = new ViolationTypesViewModel(parentWindow) };
                     ImageVisibility = false;
-                    break;
-                case "AuditLog":
-                    CurrentView = new AuditLogView { DataContext = new AuditLogViewModel() };
-                    ImageVisibility = false;
-                    break;
+                    break;             
                 default:
                     CurrentView = null;
                     ImageVisibility = true;

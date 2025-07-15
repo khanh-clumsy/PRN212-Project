@@ -35,15 +35,7 @@
                 HorizontalContentAlignment="Left" Padding="10 0"
                 Command="{Binding NavigateCommand}" 
                 CommandParameter="ViolationType"         />
-
-                <Button Content="📜 Activity Logs"
-                Margin="0 5" Height="40"
-                Background="Transparent" BorderThickness="0"
-                FontSize="14" Foreground="Black"
-                HorizontalContentAlignment="Left" Padding="10 0"
-                Command="{Binding NavigateCommand}" 
-                CommandParameter="AuditLog"         />
-
+              
                 <Button Content="🔙 Logout"
                 Width="120" 
                 Margin="0 20 0 5" Height="40"
