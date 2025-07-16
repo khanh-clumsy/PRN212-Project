@@ -20,8 +20,6 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
     public virtual DbSet<Attachment> Attachments { get; set; }
 
-    public virtual DbSet<AuditLog> AuditLogs { get; set; }
-
     public virtual DbSet<Fine> Fines { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
@@ -44,7 +42,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
     {
         modelBuilder.Entity<Appeal>(entity =>
         {
-            entity.HasKey(e => e.AppealId).HasName("PK__Appeals__BB684E1053175FFC");
+            entity.HasKey(e => e.AppealId).HasName("PK__Appeals__BB684E10BFB03AC8");
 
             entity.Property(e => e.AppealId).HasColumnName("AppealID");
             entity.Property(e => e.Result).HasMaxLength(50);
@@ -67,7 +65,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Attachment>(entity =>
         {
-            entity.HasKey(e => e.AttachmentId).HasName("PK__Attachme__442C64DEFB47DD4F");
+            entity.HasKey(e => e.AttachmentId).HasName("PK__Attachme__442C64DE88F1A81A");
 
             entity.Property(e => e.AttachmentId).HasColumnName("AttachmentID");
             entity.Property(e => e.FilePath).HasMaxLength(500);
@@ -80,26 +78,9 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
                 .HasConstraintName("FK_Attachments_Report");
         });
 
-        modelBuilder.Entity<AuditLog>(entity =>
-        {
-            entity.HasKey(e => e.LogId).HasName("PK__AuditLog__5E5499A8164A3EB8");
-
-            entity.Property(e => e.LogId).HasColumnName("LogID");
-            entity.Property(e => e.Action).HasMaxLength(100);
-            entity.Property(e => e.Timestamp)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            entity.HasOne(d => d.User).WithMany(p => p.AuditLogs)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AuditLogs_User");
-        });
-
         modelBuilder.Entity<Fine>(entity =>
         {
-            entity.HasKey(e => e.FineId).HasName("PK__Fines__9D4A9BCCD62D6DAA");
+            entity.HasKey(e => e.FineId).HasName("PK__Fines__9D4A9BCC228E49E1");
 
             entity.Property(e => e.FineId).HasColumnName("FineID");
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
@@ -118,7 +99,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32609AF2BF");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E3287862DC5");
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
             entity.Property(e => e.IsRead).HasDefaultValue(false);
@@ -136,7 +117,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Report>(entity =>
         {
-            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E54701AA03");
+            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E52BD2016A");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.Location).HasMaxLength(255);
@@ -167,9 +148,9 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC85DDB1FF");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACFFB5A1C7");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D1053442815EB8").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534974D312A").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Address).HasMaxLength(255);
@@ -186,9 +167,9 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B25A106A0A");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B271F77B2F");
 
-            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__036926246F02F7C1").IsUnique();
+            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__0369262443E92179").IsUnique();
 
             entity.Property(e => e.VehicleId).HasColumnName("VehicleID");
             entity.Property(e => e.Brand).HasMaxLength(50);
@@ -204,13 +185,14 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Violation>(entity =>
         {
-            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC2886C8386E");
+            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC28CB5FB494");
 
             entity.Property(e => e.ViolationId).HasColumnName("ViolationID");
             entity.Property(e => e.FineAmount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.FineDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.IsCancelled).HasDefaultValue(false);
             entity.Property(e => e.PaidStatus).HasDefaultValue(false);
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.ViolatorId).HasColumnName("ViolatorID");
@@ -228,7 +210,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<ViolationType>(entity =>
         {
-            entity.HasKey(e => e.ViolationTypeId).HasName("PK__Violatio__3B1A4D7DA5F34B4B");
+            entity.HasKey(e => e.ViolationTypeId).HasName("PK__Violatio__3B1A4D7D7471554D");
 
             entity.Property(e => e.ViolationTypeId).HasColumnName("ViolationTypeID");
             entity.Property(e => e.Description).HasMaxLength(255);

@@ -25,8 +25,6 @@ public partial class User
 
     public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();
 
-    public virtual ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
-
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
     public virtual ICollection<Report> ReportProcessedByNavigations { get; set; } = new List<Report>();

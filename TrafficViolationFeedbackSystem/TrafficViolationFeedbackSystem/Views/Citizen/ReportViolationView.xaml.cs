@@ -166,10 +166,14 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                     string body = $"Chào {user.FullName},\n\nPhản ánh của bạn về phương tiện {plateNumber} đã được gửi thành công và đang chờ xử lý.\n\nCảm ơn bạn đã đóng góp cho cộng đồng!";
                     await _emailService.SendEmailAsync(user.Email, subject, body);
                 }
-
                 MessageBox.Show("Phản ánh của bạn đã được gửi thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 ClearForm();
             }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Lỗi tệp đính kèm", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi gửi phản ánh: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);

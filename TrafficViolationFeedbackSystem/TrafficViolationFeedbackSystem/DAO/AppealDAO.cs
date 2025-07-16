@@ -31,6 +31,18 @@ namespace TrafficViolationFeedbackSystem.DAO
                 return false;
             }
         }
+
+        public List<Appeal> GetAllAppeals()
+        {
+            return _context.Appeals
+                .Include(a => a.Violation)
+                    .ThenInclude(v => v.Report)
+                        .ThenInclude(r => r.ViolationType)
+                .Include(a => a.Violator)
+                .OrderByDescending(a => a.SubmitDate)
+                .ToList();
+        }
+
         public bool AppealExists(int violationId)
         {
             return _context.Appeals.Any(a => a.ViolationId == violationId);

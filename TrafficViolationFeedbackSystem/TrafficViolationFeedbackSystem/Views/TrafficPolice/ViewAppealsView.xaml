@@ -3,15 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TrafficViolationFeedbackSystem.Views.TrafficPolice"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="⚖️ Xem đơn kháng cáo"
-                   FontSize="30"
-                   FontWeight="Bold"
-                   Foreground="#8B4513"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Background="White">
+        <StackPanel Margin="20">
+            <TextBlock Text="📄 Danh sách đơn kháng cáo" FontSize="28" FontWeight="Bold" Foreground="#8B4513" Margin="0,0,0,20"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBox x:Name="txtSearch" Width="250" Height="32" Margin="0,0,10,0" VerticalContentAlignment="Center" FontSize="16"/>
+                <Button x:Name="btnSearch" Content="Tìm kiếm" Width="100" Height="32" Click="btnSearch_Click"/>
+            </StackPanel> 
+            <DataGrid x:Name="dgAppeals" AutoGenerateColumns="False" Height="400" CanUserAddRows="False" SelectionMode="Single" Margin="0,0,0,10" IsReadOnly="True" MouseDoubleClick="dgAppeals_MouseDoubleClick">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đơn" Binding="{Binding AppealId}" Width="10"/>
+                    <DataGridTextColumn Header="Biển số" Binding="{Binding PlateNumber}" Width="120"/>
+                    <DataGridTextColumn Header="Người vi phạm" Binding="{Binding ViolatorName}" Width="180"/>
+                    <DataGridTextColumn Header="Nội dung" Binding="{Binding Content}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày gửi" Binding="{Binding SubmitDate, StringFormat=dd/MM/yyyy HH:mm}" Width="150"/>
+                    <DataGridTextColumn Header="Kết quả" Binding="{Binding DisplayResult}" Width="120"/>
+                    <DataGridTemplateColumn Header="Thao tác" Width="260">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="Xem chi tiết" Width="90" Height="28" Margin="0,0,8,0" Click="btnDetail_Click"/>
+                                    <Button Content="Duyệt" Width="60" Height="28" Margin="0,0,8,0" Click="btnApprove_Click"
+                                            Visibility="{Binding IsActionVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                    <Button Content="Từ chối" Width="60" Height="28" Click="btnReject_Click"
+                                            Visibility="{Binding IsActionVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </UserControl> 

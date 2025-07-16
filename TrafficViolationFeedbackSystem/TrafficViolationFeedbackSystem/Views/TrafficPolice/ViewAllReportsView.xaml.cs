@@ -51,7 +51,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                 // Lấy thông tin report từ DB
                 var report = await _context.Reports.Include(r => r.Reporter).FirstOrDefaultAsync(r => r.ReportId == selected.ReportId);
                 if (report == null) return;
-                
+                report.ProcessedBy = Int32.Parse(AuthenticationContext.UserId);
                 // Lấy violation (nếu có)
                 var violation = await _context.Violations
                            .FirstOrDefaultAsync(v => v.ReportId == selected.ReportId);
@@ -80,7 +80,6 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                             FineDate = DateTime.Now,
                             PaidStatus = false
                         };
-
                         _context.Violations.Add(violation);
                         await _context.SaveChangesAsync();
                     }
@@ -108,6 +107,10 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
             if (dgReports.SelectedItem is ReportViewModel selected)
             {
                 await _reportController.UpdateReportStatusAsync(selected.ReportId, "Rejected");
+                var report = await _context.Reports.Include(r => r.Reporter).FirstOrDefaultAsync(r => r.ReportId == selected.ReportId);
+                if (report == null) return;
+                report.ProcessedBy = Int32.Parse(AuthenticationContext.UserId); // Ghi nhận người xử lý
+                await _context.SaveChangesAsync();
                 await LoadDataAsync();
             }
         }
