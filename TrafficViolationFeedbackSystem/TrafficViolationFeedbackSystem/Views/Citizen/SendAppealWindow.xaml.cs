@@ -73,6 +73,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                     ViolationId = _violationId,
                     ViolatorId = _userId,
                     Content = content,
+                    Result = "Pending",
                     SubmitDate = DateTime.Now
                 };
                 dao.AddAppeal(appeal);

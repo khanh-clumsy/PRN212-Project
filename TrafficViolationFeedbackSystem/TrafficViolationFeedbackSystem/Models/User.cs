@@ -25,6 +25,10 @@ public partial class User
 
     public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();
 
+    public virtual ICollection<Fine> FineConfirmedByNavigations { get; set; } = new List<Fine>();
+
+    public virtual ICollection<Fine> FineCreatedByNavigations { get; set; } = new List<Fine>();
+
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
     public virtual ICollection<Report> ReportProcessedByNavigations { get; set; } = new List<Report>();

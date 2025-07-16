@@ -15,13 +15,15 @@ public partial class Violation
 
     public DateTime? FineDate { get; set; }
 
-    public bool? PaidStatus { get; set; }
+    public DateTime? DueDate { get; set; }
 
-    public bool? IsCancelled { get; set; }
+    public string? Status { get; set; }
 
     public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();
 
     public virtual ICollection<Fine> Fines { get; set; } = new List<Fine>();
+
+    public bool CanAppeal => Appeals == null || Appeals.Count == 0;
 
     public virtual Report Report { get; set; } = null!;
 

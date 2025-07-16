@@ -23,9 +23,11 @@ namespace TrafficViolationFeedbackSystem.DAO
             return _context.Violations
                 .Include(v => v.Report)
                     .ThenInclude(r => r.ViolationType)
+                .Include(v => v.Appeals)
                 .Where(v => v.ViolatorId == userId)
                 .ToList();
         }
+
 
 
     }
