@@ -44,5 +44,8 @@
     <Compile Update="Views\Authentication\LoginWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\TrafficPolice\EditVehicleView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
