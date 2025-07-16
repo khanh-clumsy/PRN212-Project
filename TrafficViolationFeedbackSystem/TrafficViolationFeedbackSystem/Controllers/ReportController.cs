@@ -63,5 +63,41 @@ namespace TrafficViolationFeedbackSystem.Controllers
                     Status = r.Status,
                 }).ToList();
         }
+
+        public async Task<List<ReportViewModel>> GetFilteredReportsAsyncByReporterID(int reporterId, string search, string status)
+        {
+            var violationTypes = _violationTypesDAO.GetAllViolationTypes();
+            var reports = await _reportDAO.GetAllReportsAsync();
+            var query = reports
+                .Where(r => r.ReporterId == reporterId)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.ToLower();
+                query = query.Where(r =>
+                    r.PlateNumber.ToLower().Contains(search)
+                );
+            }
+
+            if (!string.IsNullOrWhiteSpace(status))
+            {
+                query = query.Where(r => r.Status == status);
+            }
+
+            return query
+                .ToList()
+                .Select(r => new ReportViewModel
+                {
+                    ReportId = r.ReportId,
+                    PlateNumber = r.PlateNumber,
+                    OwnerName = _userDAO.GetVehicleOwnerNameByPlateNumber(r.PlateNumber),
+                    ViolationTypeName = violationTypes.FirstOrDefault(v => v.ViolationTypeId == r.ViolationTypeId)?.Name ?? "",
+                    Description = r.Description,
+                    Location = r.Location,
+                    ReportDate = r.ReportDate,
+                    Status = r.Status,
+                }).ToList();
+        }
     }
 }

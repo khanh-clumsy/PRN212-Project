@@ -92,9 +92,9 @@ namespace TrafficViolationFeedbackSystem.DAO
                 {
                     return (false, "Vui lòng nhập email và mật khẩu.", null);
                 }
-
+                using var freshContext = new TrafficViolationFeedbackSystemContext();
                 // Tìm user theo email
-                var user = _context.Users.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+                var user = freshContext.Users.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
 
                 if (user == null)
                 {
@@ -102,7 +102,7 @@ namespace TrafficViolationFeedbackSystem.DAO
                 }
 
                 // Kiểm tra mật khẩu
-                if (!VerifyPassword(password, user.Password))
+                if (!VerifyPassword(password.Trim(), user.Password))
                 {
                     return (false, "Mật khẩu không đúng.", null);
                 }
@@ -113,6 +113,19 @@ namespace TrafficViolationFeedbackSystem.DAO
             {
                 return (false, $"Lỗi đăng nhập: {ex.Message}", null);
             }
+        }
+        private string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hashedBytes);
+            }
+        }
+
+        private bool VerifyPassword(string password, string hashedPassword)
+        {
+            return HashPassword(password) == hashedPassword;
         }
         public User GetUserById(int userId)
         {
@@ -211,18 +224,6 @@ namespace TrafficViolationFeedbackSystem.DAO
                 .FirstOrDefault();
         }
 
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashedBytes);
-            }
-        }
-
-        private bool VerifyPassword(string password, string hashedPassword)
-        {
-            return HashPassword(password) == hashedPassword;
-        }
+       
     }
 }

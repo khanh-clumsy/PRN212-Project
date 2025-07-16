@@ -44,24 +44,31 @@ namespace TrafficViolationFeedbackSystem.DAO
         }
         public async Task CreateReportWithAttachment(Report report, string filePath)
         {
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                string ext = Path.GetExtension(filePath).ToLower();
+                var allowedExts = new[] { ".jpg", ".jpeg", ".png", ".mp4" };
+
+                if (!allowedExts.Contains(ext))
+                {
+                    throw new InvalidOperationException("Chỉ hỗ trợ ảnh (.jpg, .jpeg, .png) và video (.mp4).");
+                }
+
+                FileInfo fileInfo = new FileInfo(filePath);
+                if (fileInfo.Length > 5 * 1024 * 1024)
+                {
+                    throw new InvalidOperationException("File vượt quá kích thước cho phép (tối đa 5MB).");
+                }
+            }
+
+            // Lưu báo cáo
             await _context.Reports.AddAsync(report);
             await _context.SaveChangesAsync();
 
             if (!string.IsNullOrEmpty(filePath))
             {
-                // Kiểm tra phần mở rộng
                 string ext = Path.GetExtension(filePath).ToLower();
-                var allowedExts = new[] { ".jpg", ".jpeg", ".png", ".mp4" };
-
-                if (!allowedExts.Contains(ext))
-                    MessageBox.Show("Chỉ hỗ trợ ảnh (.jpg, .jpeg, .png) và video (.mp4)");
-
-                // Kiểm tra dung lượng file
-                FileInfo fileInfo = new FileInfo(filePath);
-                if (fileInfo.Length > 5 * 1024 * 1024) // > 5MB
-                    MessageBox.Show("File vượt quá kích thước cho phép (tối đa 5MB)");
-
-                string fileName = Guid.NewGuid().ToString() + Path.GetExtension(filePath);
+                string fileName = Guid.NewGuid().ToString() + ext;
                 string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "Image", "Report");
 
                 if (!Directory.Exists(folderPath))
@@ -83,5 +90,7 @@ namespace TrafficViolationFeedbackSystem.DAO
                 await _context.SaveChangesAsync();
             }
         }
+
+
     }
 }

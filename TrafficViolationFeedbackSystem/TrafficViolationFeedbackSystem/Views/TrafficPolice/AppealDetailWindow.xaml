@@ -1,27 +1,28 @@
-<Window x:Class="TrafficViolationFeedbackSystem.Views.TrafficPolice.ReportDetailWindow"
+<Window x:Class="TrafficViolationFeedbackSystem.Views.TrafficPolice.AppealDetailWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Chi tiết phản ánh" Height="500" Width="600" WindowStartupLocation="CenterScreen">
+        Title="Chi tiết đơn kháng cáo" Height="420" Width="600" WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Chi tiết phản ánh" FontSize="24" FontWeight="Bold" Foreground="#007BFF" Margin="0,0,0,10"/>
-            <TextBlock x:Name="txtReportId" FontWeight="Bold"/>
+            <TextBlock Text="Chi tiết đơn kháng cáo" FontSize="24" FontWeight="Bold" Foreground="#8B4513" Margin="0,0,0,10"/>
+            <TextBlock x:Name="txtAppealId" FontWeight="Bold"/>
             <TextBlock x:Name="txtPlateNumber"/>
-            <TextBlock x:Name="txtViolationType"/>
-            <TextBlock x:Name="txtDescription" TextWrapping="Wrap"/>
-            <TextBlock x:Name="txtLocation"/>
-            <TextBlock x:Name="txtReportDate"/>
-            <TextBlock x:Name="txtStatus"/>
+            <TextBlock x:Name="txtViolatorName"/>
+            <TextBlock x:Name="txtContent" TextWrapping="Wrap"/>
+            <TextBlock x:Name="txtSubmitDate"/>
+            <TextBlock x:Name="txtResult"/>
         </StackPanel>
-        <GroupBox Header="File đính kèm" Grid.Row="1">
+        <GroupBox Header="Ảnh vi phạm" Grid.Row="1" Margin="0,10,0,0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                 <TextBlock x:Name="txtAttachmentName" FontWeight="Bold" Margin="0,0,10,0"/>
                 <Button x:Name="btnViewSingleAttachment" Content="Xem" Click="btnViewSingleAttachment_Click"/>
             </StackPanel>
         </GroupBox>
+
     </Grid>
 </Window> 

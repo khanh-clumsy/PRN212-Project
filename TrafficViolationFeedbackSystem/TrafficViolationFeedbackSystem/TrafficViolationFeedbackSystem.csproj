@@ -35,6 +35,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3351.48" />
   </ItemGroup>
 
   <ItemGroup>

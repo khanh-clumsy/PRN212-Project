@@ -4,7 +4,7 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Services
+namespace TrafficViolationFeedbackSystem.Services
 {
     public class EmailService
     {

@@ -11,6 +11,12 @@
     <Compile Update="Views\Authentication\RegisterView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Authentication\ResetPasswordView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Authentication\VerifyCodeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Citizen\AppealView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -39,6 +45,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\TrafficPolice\EditVehicleView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\VNPay\VNPayPaymentWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -20,7 +20,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         }
         private void btnViewAppeals_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            setContent?.Invoke(new ViewAppealsView());
+            setContent?.Invoke(new ViewAppealsView(_context));
         }
         private void btnAddVehicle_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -29,6 +29,11 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         private void btnViewVehicles_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             setContent?.Invoke(new VehicleListView(_context));
+        }
+        // New event handler for viewing all violations
+        private void btnViewAllViolations_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            setContent?.Invoke(new Views.TrafficPolice.ViewAllViolationsView(_context));
         }
     }
 } 
