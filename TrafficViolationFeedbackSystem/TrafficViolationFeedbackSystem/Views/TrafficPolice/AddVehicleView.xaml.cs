@@ -15,38 +15,60 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         {
             InitializeComponent();
             _context = context;
-            LoadUsers();
-        }
-
-        private void LoadUsers()
-        {
-            var users = _context.Users.ToList();
-            OwnerComboBox.ItemsSource = users;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!int.TryParse(YearBox.Text.Trim(), out int year))
+            string plateNumber = PlateBox.Text.Trim();
+            string brand = BrandBox.Text.Trim();
+            string model = ModelBox.Text.Trim();
+            string ownerEmail = OwnerEmailBox.Text.Trim();
+            string yearText = YearBox.Text.Trim();
+
+            if (string.IsNullOrEmpty(plateNumber) ||
+                string.IsNullOrEmpty(brand) ||
+                string.IsNullOrEmpty(model) ||
+                string.IsNullOrEmpty(ownerEmail) ||
+                string.IsNullOrEmpty(yearText))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin.");
+                return;
+            }
+
+            // Kiểm tra năm sản xuất
+            if (!int.TryParse(yearText, out int year))
             {
                 MessageBox.Show("Năm sản xuất không hợp lệ!");
                 return;
             }
 
-            if (OwnerComboBox.SelectedItem is not TrafficViolationFeedbackSystem.Models.User selectedUser)
+            // Kiểm tra biển số đã tồn tại chưa
+            var existingVehicle = _context.Vehicles.FirstOrDefault(v => v.PlateNumber == plateNumber);
+            if (existingVehicle != null)
             {
-                MessageBox.Show("Vui lòng chọn chủ sở hữu.");
+                MessageBox.Show("Biển số đã tồn tại trong hệ thống!");
                 return;
             }
 
+            // Kiểm tra người dùng có tồn tại không
+            var user = _context.Users.FirstOrDefault(u => u.Email == ownerEmail);
+            if (user == null)
+            {
+                MessageBox.Show("Không tìm thấy người dùng với email này.");
+                return;
+            }
+
+            // Tạo mới phương tiện
             var vehicle = new Vehicle
             {
-                PlateNumber = PlateBox.Text.Trim(),
-                Brand = BrandBox.Text.Trim(),
-                Model = ModelBox.Text.Trim(),
+                PlateNumber = plateNumber,
+                Brand = brand,
+                Model = model,
                 ManufactureYear = year,
-                OwnerId = selectedUser.UserId
+                OwnerId = user.UserId
             };
 
+            // Thêm vào DB
             var dao = new VehicleDAO();
             dao.InsertVehicle(vehicle);
 
@@ -57,7 +79,5 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         {
             Application.Current.MainWindow.Content = new VehicleListView(_context);
         }
-
-
     }
 }

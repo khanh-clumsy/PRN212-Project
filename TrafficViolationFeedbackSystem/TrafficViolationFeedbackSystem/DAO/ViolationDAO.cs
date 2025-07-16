@@ -27,8 +27,39 @@ namespace TrafficViolationFeedbackSystem.DAO
                 .Where(v => v.ViolatorId == userId)
                 .ToList();
         }
+        public List<Violation> GetAllViolations()
+        {
+            return _context.Violations
+                .Include(v => v.Report)
+                    .ThenInclude(r => r.ViolationType)
+                .Include(v => v.Violator)
+                .ToList();
+        }
+        public List<Violation> SearchByDescription(string keyword)
+        {
+            return _context.Violations
+                .Include(v => v.Report)
+                    .ThenInclude(r => r.ViolationType)
+                .Include(v => v.Violator)
+                .Where(v => v.Report.Description.Contains(keyword))
+                .ToList();
+        }
 
+        public List<Violation> FilterByTypeAndStatus(int? typeId, string status)
+        {
+            var query = _context.Violations
+                .Include(v => v.Report)
+                    .ThenInclude(r => r.ViolationType)
+                .Include(v => v.Violator)
+                .AsQueryable();
 
+            if (typeId.HasValue)
+                query = query.Where(v => v.Report.ViolationTypeId == typeId.Value);
 
+            if (!string.IsNullOrEmpty(status))
+                query = query.Where(v => v.Status == status);
+
+            return query.ToList();
+        }
     }
 }

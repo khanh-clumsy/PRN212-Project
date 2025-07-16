@@ -32,17 +32,5 @@ public partial class Appeal
     public virtual Violation Violation { get; set; } = null!;
 
     public virtual User Violator { get; set; } = null!;
-    public string DisplayResult
-    {
-        get
-        {
-            return Result switch
-            {
-                "Approved" => "Đã duyệt",
-                "Rejected" => "Từ chối",
-                "Pending" or null or "" => "Đang chờ",
-                _ => Result
-            };
-        }
-    }
+    
 }
