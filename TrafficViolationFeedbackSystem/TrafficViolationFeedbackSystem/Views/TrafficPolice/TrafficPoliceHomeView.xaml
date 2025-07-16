@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/> <!-- New row for additional buttons -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -43,5 +44,13 @@
                 Width="320" Height="120"
                 Margin="20"
                 Click="btnViewVehicles_Click"/>
+        <!-- New button for viewing all violations -->
+        <Button Content="📋 Xem tất cả vi phạm"
+                Grid.Row="2" Grid.Column="0"
+                Style="{StaticResource ModernButton}"
+                FontSize="22"
+                Width="320" Height="120"
+                Margin="20"
+                Click="btnViewAllViolations_Click"/>
     </Grid>
 </UserControl> 

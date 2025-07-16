@@ -42,7 +42,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
     {
         modelBuilder.Entity<Appeal>(entity =>
         {
-            entity.HasKey(e => e.AppealId).HasName("PK__Appeals__BB684E10BFB03AC8");
+            entity.HasKey(e => e.AppealId).HasName("PK__Appeals__BB684E102475E0B2");
 
             entity.Property(e => e.AppealId).HasColumnName("AppealID");
             entity.Property(e => e.Result).HasMaxLength(50);
@@ -65,7 +65,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Attachment>(entity =>
         {
-            entity.HasKey(e => e.AttachmentId).HasName("PK__Attachme__442C64DE88F1A81A");
+            entity.HasKey(e => e.AttachmentId).HasName("PK__Attachme__442C64DEBF853970");
 
             entity.Property(e => e.AttachmentId).HasColumnName("AttachmentID");
             entity.Property(e => e.FilePath).HasMaxLength(500);
@@ -80,16 +80,27 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Fine>(entity =>
         {
-            entity.HasKey(e => e.FineId).HasName("PK__Fines__9D4A9BCC228E49E1");
+            entity.HasKey(e => e.FineId).HasName("PK__Fines__9D4A9BCCAB0C86C3");
 
             entity.Property(e => e.FineId).HasColumnName("FineID");
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.IsConfirmed).HasDefaultValue(false);
             entity.Property(e => e.PaymentDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.PaymentMethod).HasMaxLength(50);
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Pending");
+            entity.Property(e => e.TransactionCode).HasMaxLength(100);
             entity.Property(e => e.ViolationId).HasColumnName("ViolationID");
+
+            entity.HasOne(d => d.ConfirmedByNavigation).WithMany(p => p.FineConfirmedByNavigations)
+                .HasForeignKey(d => d.ConfirmedBy)
+                .HasConstraintName("FK_Fines_ConfirmedBy");
+
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.FineCreatedByNavigations)
+                .HasForeignKey(d => d.CreatedBy)
+                .HasConstraintName("FK_Fines_CreatedBy");
 
             entity.HasOne(d => d.Violation).WithMany(p => p.Fines)
                 .HasForeignKey(d => d.ViolationId)
@@ -99,7 +110,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E3287862DC5");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E321BC89601");
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
             entity.Property(e => e.IsRead).HasDefaultValue(false);
@@ -117,7 +128,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Report>(entity =>
         {
-            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E52BD2016A");
+            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E5E9F136FD");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.Location).HasMaxLength(255);
@@ -148,9 +159,9 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACFFB5A1C7");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACC640F5A2");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534974D312A").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D105341AF4A09F").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Address).HasMaxLength(255);
@@ -167,9 +178,9 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B271F77B2F");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B2FA3FF06F");
 
-            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__0369262443E92179").IsUnique();
+            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__03692624ADC02C9B").IsUnique();
 
             entity.Property(e => e.VehicleId).HasColumnName("VehicleID");
             entity.Property(e => e.Brand).HasMaxLength(50);
@@ -185,16 +196,18 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<Violation>(entity =>
         {
-            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC28CB5FB494");
+            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC28984C8DE1");
 
             entity.Property(e => e.ViolationId).HasColumnName("ViolationID");
+            entity.Property(e => e.DueDate).HasColumnType("datetime");
             entity.Property(e => e.FineAmount).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.FineDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.IsCancelled).HasDefaultValue(false);
-            entity.Property(e => e.PaidStatus).HasDefaultValue(false);
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Active");
             entity.Property(e => e.ViolatorId).HasColumnName("ViolatorID");
 
             entity.HasOne(d => d.Report).WithMany(p => p.Violations)
@@ -210,7 +223,7 @@ public partial class TrafficViolationFeedbackSystemContext : DbContext
 
         modelBuilder.Entity<ViolationType>(entity =>
         {
-            entity.HasKey(e => e.ViolationTypeId).HasName("PK__Violatio__3B1A4D7D7471554D");
+            entity.HasKey(e => e.ViolationTypeId).HasName("PK__Violatio__3B1A4D7D6F539673");
 
             entity.Property(e => e.ViolationTypeId).HasColumnName("ViolationTypeID");
             entity.Property(e => e.Description).HasMaxLength(255);

@@ -13,6 +13,24 @@
                 <Button x:Name="btnSearch" Content="Tìm kiếm" Width="100" Height="32" Click="btnSearch_Click"/>
             </StackPanel> 
             <DataGrid x:Name="dgAppeals" AutoGenerateColumns="False" Height="400" CanUserAddRows="False" SelectionMode="Single" Margin="0,0,0,10" IsReadOnly="True" MouseDoubleClick="dgAppeals_MouseDoubleClick">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Result}" Value="Pending">
+                                <Setter Property="Background" Value="#FFFDE9B6"/>
+                                <!-- vàng nhạt -->
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Result}" Value="Approved">
+                                <Setter Property="Background" Value="#FFDFFFD6"/>
+                                <!-- xanh nhạt -->
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Result}" Value="Rejected">
+                                <Setter Property="Background" Value="#FFF8D7DA"/>
+                                <!-- đỏ nhạt -->
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn" Binding="{Binding AppealId}" Width="10"/>
                     <DataGridTextColumn Header="Biển số" Binding="{Binding PlateNumber}" Width="120"/>
@@ -28,7 +46,7 @@
                                     <Button Content="Duyệt" Width="60" Height="28" Margin="0,0,8,0" Click="btnApprove_Click"
                                             Visibility="{Binding IsActionVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                     <Button Content="Từ chối" Width="60" Height="28" Click="btnReject_Click"
-                                            Visibility="{Binding IsActionVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                           Visibility="{Binding IsActionVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

@@ -19,7 +19,12 @@ namespace TrafficViolationFeedbackSystem.Controllers
 
         public List<AppealViewModel> GetAllAppeals()
         {
-            var appeals = _appealDAO.GetAllAppeals();
+            using var newContext = new TrafficViolationFeedbackSystemContext(); 
+            var appeals = newContext.Appeals
+                .Include(a => a.Violation).ThenInclude(v => v.Report)
+                .Include(a => a.Violator)
+                .ToList();
+
             return appeals.Select(a => new AppealViewModel
             {
                 AppealId = a.AppealId,
@@ -31,5 +36,6 @@ namespace TrafficViolationFeedbackSystem.Controllers
                 Result = a.Result
             }).ToList();
         }
+
     }
 } 

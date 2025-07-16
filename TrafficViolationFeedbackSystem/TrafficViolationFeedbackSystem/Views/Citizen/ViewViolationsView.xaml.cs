@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.DAO;
+using TrafficViolationFeedbackSystem.Services;
 
 namespace TrafficViolationFeedbackSystem.Views.Citizen
 {
@@ -30,7 +31,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
         void loadViolationView()
         {
             ViolationDAO dao = new ViolationDAO();
-            var violation = dao.GetViolationsForUser(1);
+            var violation = dao.GetViolationsForUser(Int32.Parse(AuthenticationContext.UserId));
             this.dgViolations.ItemsSource = violation;
         }
         private void AppealButton_Click(object sender, RoutedEventArgs e)

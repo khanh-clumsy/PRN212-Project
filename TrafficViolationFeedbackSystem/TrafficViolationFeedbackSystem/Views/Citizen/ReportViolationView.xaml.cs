@@ -12,6 +12,7 @@ using TrafficViolationFeedbackSystem.DAO;
 using TrafficViolationFeedbackSystem.Data;
 using TrafficViolationFeedbackSystem.Models;
 using TrafficViolationFeedbackSystem.Services;
+using TrafficViolationFeedbackSystem.Views.VNPay;
 namespace TrafficViolationFeedbackSystem.Views.Citizen
 {
     public partial class ReportViolationView : UserControl
@@ -183,6 +184,18 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                 btnSubmitReport.IsEnabled = true;
             }
         }
+        //private void BtnPay_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string orderId = DateTime.Now.Ticks.ToString();
+        //    decimal amount = 500000; // số tiền
+        //    string description = "Thanh toán vi phạm giao thông";
+
+        //    string paymentUrl = VNPayHelper.CreatePaymentUrl(amount, orderId, description);
+
+        //    var paymentWindow = new VNPayPaymentWindow(paymentUrl);
+        //    paymentWindow.ShowDialog();
+        //}
+
         public async Task<bool> IsMyVehicleAsync(string plateNumber, int currentUserId)
         {
             if (string.IsNullOrWhiteSpace(plateNumber)) return false;

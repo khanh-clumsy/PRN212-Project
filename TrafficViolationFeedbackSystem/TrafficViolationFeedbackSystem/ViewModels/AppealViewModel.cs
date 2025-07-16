@@ -1,4 +1,5 @@
 ﻿using System;
+using ControlzEx.Standard;
 
 namespace TrafficViolationFeedbackSystem.ViewModels
 {
@@ -11,7 +12,6 @@ namespace TrafficViolationFeedbackSystem.ViewModels
         public string Content { get; set; }
         public DateTime? SubmitDate { get; set; }
         public string Result { get; set; }
-        public bool IsActionVisible => Result?.Trim() == "Pending";
 
         public string DisplayResult
         {
@@ -21,10 +21,12 @@ namespace TrafficViolationFeedbackSystem.ViewModels
                 {
                     "Approved" => "Đã duyệt",
                     "Rejected" => "Từ chối",
-                    "Pending" or null or "" => "Đang chờ",
+                    "Pending" => "Đang chờ",
                     _ => Result
                 };
             }
         }
+        public bool IsActionVisible => Result == "Pending";
+
     }
 } 

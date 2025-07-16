@@ -78,7 +78,6 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                             ViolatorId = vehicle.Owner.UserId,
                             FineAmount = fine,
                             FineDate = DateTime.Now,
-                            PaidStatus = false
                         };
                         _context.Violations.Add(violation);
                         await _context.SaveChangesAsync();

@@ -51,6 +51,7 @@ namespace TrafficViolationFeedbackSystem.DAO
         public List<Appeal> GetAppealsByUser(int userId)
         {
             return _context.Appeals
+                .Include(a => a.Violator)
                 .Include(a => a.Violation)
                     .ThenInclude(v => v.Report)
                         .ThenInclude(r => r.ViolationType)

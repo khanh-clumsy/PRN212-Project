@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.EntityFrameworkCore;
 using TrafficViolationFeedbackSystem.Controllers;
 using TrafficViolationFeedbackSystem.Data;
-using TrafficViolationFeedbackSystem.ViewModels;
-using Microsoft.EntityFrameworkCore;
+using TrafficViolationFeedbackSystem.Models;
 using TrafficViolationFeedbackSystem.Services;
+using TrafficViolationFeedbackSystem.ViewModels;
 
 namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
 {
@@ -25,17 +27,26 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
             _ = LoadDataAsync();
         }
 
-        private async Task LoadDataAsync()
+        private async Task<List<AppealViewModel>> GetAppealsAsync(string search = null)
         {
-            string search = txtSearch.Text?.Trim().ToLower();
+            // Lấy lại danh sách appeals mới nhất từ DB
             var appeals = await Task.Run(() => _appealController.GetAllAppeals());
             if (!string.IsNullOrWhiteSpace(search))
             {
+                search = search.ToLower();
                 appeals = appeals.Where(a =>
                     (a.PlateNumber != null && a.PlateNumber.ToLower().Contains(search))
                 ).ToList();
             }
-            dgAppeals.ItemsSource = appeals;
+            return appeals;
+        }
+
+        private async Task LoadDataAsync()
+        {
+            string search = txtSearch.Text?.Trim();
+            var appeals = await GetAppealsAsync(search);
+            dgAppeals.ItemsSource = null;
+            dgAppeals.ItemsSource = appeals.ToList(); // luôn tạo list mới
         }
 
         private async void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -47,38 +58,34 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         {
             if (dgAppeals.SelectedItem is AppealViewModel selected)
             {
-                var appeal = _context.Appeals
+                // Lấy lại entity từ DB
+                var appeal = await _context.Appeals
                     .Include(a => a.Violation)
                         .ThenInclude(v => v.Report)
                     .Include(a => a.Violator)
-                    .FirstOrDefault(a => a.AppealId == selected.AppealId);
+                    .FirstOrDefaultAsync(a => a.AppealId == selected.AppealId);
                 if (appeal == null || appeal.Violation == null) return;
                 var violation = appeal.Violation;
                 var violator = appeal.Violator;
                 var reporter = violation.Report?.ReporterId != null ? _context.Users.FirstOrDefault(u => u.UserId == violation.Report.ReporterId) : null;
                 appeal.Result = "Approved";
-                violation.IsCancelled = true;
+                violation.Status = "Cancelled";
                 await _context.SaveChangesAsync();
-                // Gửi email cho người bị báo cáo (người vi phạm)
-                _ = Task.Run(async () =>
-                {
-                    if (violator != null && !string.IsNullOrEmpty(violator.Email))
-                    {
-                        string subject = "Đơn kháng cáo của bạn đã được duyệt";
-                        string body = $"Chào {violator.FullName},\n\nĐơn kháng cáo của bạn về phương tiện {violation.Report.PlateNumber} đã được duyệt thành công. Vi phạm đã được hủy bỏ.";
-                        await new EmailService().SendEmailAsync(violator.Email, subject, body);
-                    }
-                    // Gửi email cho người báo cáo
-                    if (reporter != null && !string.IsNullOrEmpty(reporter.Email))
-                    {
-                        string subject = "Báo cáo của bạn đã bị kháng cáo thành công";
-                        string body = $"Chào {reporter.FullName},\n\nBáo cáo về phương tiện {violation.Report.PlateNumber} đã bị kháng cáo thành công và vi phạm đã được hủy bỏ.";
-                        await new EmailService().SendEmailAsync(reporter.Email, subject, body);
-                    }
-                });
-
-                MessageBox.Show("Đã duyệt đơn kháng cáo và gửi email thông báo!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 await LoadDataAsync();
+                dgAppeals.SelectedItem = null;
+                // Gửi email sau khi UI đã reload
+                if (violator != null && !string.IsNullOrEmpty(violator.Email))
+                {
+                    string subject = "Đơn kháng cáo của bạn đã được duyệt";
+                    string body = $"Chào {violator.FullName},\n\nĐơn kháng cáo của bạn về phương tiện {violation.Report.PlateNumber} đã được duyệt thành công. Vi phạm đã được hủy bỏ.";
+                    await new EmailService().SendEmailAsync(violator.Email, subject, body);
+                }
+                if (reporter != null && !string.IsNullOrEmpty(reporter.Email))
+                {
+                    string subject = "Báo cáo của bạn đã bị kháng cáo thành công";
+                    string body = $"Chào {reporter.FullName},\n\nBáo cáo về phương tiện {violation.Report.PlateNumber} đã bị kháng cáo thành công và vi phạm đã được hủy bỏ.";
+                    await new EmailService().SendEmailAsync(reporter.Email, subject, body);
+                }
             }
         }
 
@@ -86,28 +93,40 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         {
             if (dgAppeals.SelectedItem is AppealViewModel selected)
             {
-                var appeal = _context.Appeals
+                var appeal = await _context.Appeals
                     .Include(a => a.Violation)
                         .ThenInclude(v => v.Report)
                     .Include(a => a.Violator)
-                    .FirstOrDefault(a => a.AppealId == selected.AppealId);
+                    .FirstOrDefaultAsync(a => a.AppealId == selected.AppealId);
                 if (appeal == null) return;
                 var violation = appeal.Violation;
                 var violator = appeal.Violator;
                 appeal.Result = "Rejected";
-                await _context.SaveChangesAsync();
-                // Gửi email cho người vi phạm (bị từ chối kháng cáo)
-                _ = Task.Run(async () =>
+                violation.Status = "RejectedAppeal";
+                // Tạo fine mới nếu cần
+                var v = await _context.Violations
+                    .Include(vio => vio.Report)
+                    .FirstOrDefaultAsync(vio => vio.ViolationId == violation.ViolationId);
+                if (v != null)
                 {
-                    if (violator != null && !string.IsNullOrEmpty(violator.Email))
+                    var fine = new Fine
                     {
-                        string subject = "Đơn kháng cáo của bạn đã bị từ chối";
-                        string body = $"Chào {violator.FullName},\n\nĐơn kháng cáo về phương tiện {violation.Report.PlateNumber} đã bị từ chối. Vui lòng liên hệ cơ quan chức năng để biết thêm chi tiết.";
-                        await new EmailService().SendEmailAsync(violator.Email, subject, body);
-                    }
-                });
-                MessageBox.Show("Đã từ chối đơn kháng cáo và gửi email thông báo!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ViolationId = v.ViolationId,
+                        Amount = v.FineAmount,
+                        Status = "Pending"
+                    };
+                    _context.Fines.Add(fine);
+                }
+                await _context.SaveChangesAsync();
                 await LoadDataAsync();
+                dgAppeals.SelectedItem = null;
+                // Gửi email sau khi UI đã reload
+                if (violator != null && !string.IsNullOrEmpty(violator.Email))
+                {
+                    string subject = "Đơn kháng cáo của bạn đã bị từ chối! Vui lòng vào ứng dụng để nộp phạt trực tuyến!";
+                    string body = $"Chào {violator.FullName},\n\nĐơn kháng cáo về phương tiện {violation.Report.PlateNumber} đã bị từ chối. Vui lòng liên hệ cơ quan chức năng hoặc thanh toán tiền phạt online.";
+                    await new EmailService().SendEmailAsync(violator.Email, subject, body);
+                }
             }
         }
 

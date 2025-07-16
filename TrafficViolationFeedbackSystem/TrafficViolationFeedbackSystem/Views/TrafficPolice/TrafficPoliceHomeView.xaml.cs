@@ -30,5 +30,10 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         {
             setContent?.Invoke(new VehicleListView(_context));
         }
+        // New event handler for viewing all violations
+        private void btnViewAllViolations_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            setContent?.Invoke(new Views.TrafficPolice.ViewAllViolationsView(_context));
+        }
     }
 } 

@@ -22,9 +22,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     /// </summary>
     public partial class AppealView : UserControl
     {
-        //private int userId =Int32.Parse(AuthenticationContext.UserId);
-        private int userId = 1;
-
+        private int userId = Int32.Parse(AuthenticationContext.UserId);
         public AppealView()
         {
             InitializeComponent();
