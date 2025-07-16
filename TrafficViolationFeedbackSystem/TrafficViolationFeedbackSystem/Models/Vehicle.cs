@@ -9,7 +9,7 @@ public partial class Vehicle
 
     public string PlateNumber { get; set; } = null!;
 
-    public int? OwnerId { get; set; }
+    public int OwnerId { get; set; }
 
     public string? Brand { get; set; }
 
@@ -17,5 +17,5 @@ public partial class Vehicle
 
     public int? ManufactureYear { get; set; }
 
-    public virtual User? Owner { get; set; }
+    public virtual User Owner { get; set; } = null!;
 }

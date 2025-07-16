@@ -101,7 +101,7 @@ namespace TrafficViolationFeedbackSystem
                     MessageBox.Show("Người dùng đã được cập nhật thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // Quay lại UserManagementView
-                    var mainWindow = Application.Current.MainWindow?.DataContext as MainViewModel;
+                    var mainWindow = Application.Current.MainWindow?.DataContext as AdminDashboardModel;
                     if (mainWindow != null)
                     {
                         mainWindow.CurrentView = new UserManagementView { DataContext = new UserManagementViewModel() };

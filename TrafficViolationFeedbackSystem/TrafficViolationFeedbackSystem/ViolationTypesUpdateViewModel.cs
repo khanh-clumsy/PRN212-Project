@@ -73,7 +73,7 @@ namespace TrafficViolationFeedbackSystem
                     MessageBox.Show("Loại vi phạm đã được cập nhật thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // Quay lại ViolationTypesView
-                    var mainWindow = Application.Current.MainWindow?.DataContext as MainViewModel;
+                    var mainWindow = Application.Current.MainWindow?.DataContext as AdminDashboardModel;
                     if (mainWindow != null)
                     {
                         mainWindow.CurrentView = new ViolationTypesView { DataContext = new ViolationTypesViewModel(Application.Current.MainWindow) };

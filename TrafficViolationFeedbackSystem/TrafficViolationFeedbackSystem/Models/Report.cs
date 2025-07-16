@@ -7,11 +7,11 @@ public partial class Report
 {
     public int ReportId { get; set; }
 
-    public int? ReporterId { get; set; }
+    public int ReporterId { get; set; }
 
     public string PlateNumber { get; set; } = null!;
 
-    public int? ViolationTypeId { get; set; }
+    public int ViolationTypeId { get; set; }
 
     public string? Description { get; set; }
 
@@ -27,9 +27,9 @@ public partial class Report
 
     public virtual User? ProcessedByNavigation { get; set; }
 
-    public virtual User? Reporter { get; set; }
+    public virtual User Reporter { get; set; } = null!;
 
-    public virtual ViolationType? ViolationType { get; set; }
+    public virtual ViolationType ViolationType { get; set; } = null!;
 
     public virtual ICollection<Violation> Violations { get; set; } = new List<Violation>();
 }

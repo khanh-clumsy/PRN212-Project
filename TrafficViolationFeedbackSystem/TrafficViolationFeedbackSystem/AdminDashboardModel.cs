@@ -9,7 +9,7 @@ using TrafficViolationFeedbackSystem.Models;
 
 namespace TrafficViolationFeedbackSystem
 {
-    public class MainViewModel : BaseViewModel
+    public class AdminDashboardModel : BaseViewModel
     {
         private object _currentView;
         private bool _imageVisibility;
@@ -37,7 +37,7 @@ namespace TrafficViolationFeedbackSystem
         public ICommand NavigateCommand { get; }
         public ICommand LogoutCommand { get; }
 
-        public MainViewModel()
+        public AdminDashboardModel()
         {
             NavigateCommand = new RelayCommand(Navigate);
             LogoutCommand = new RelayCommand(Logout);

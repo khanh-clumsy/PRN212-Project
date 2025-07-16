@@ -2,25 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="UserCreateView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UserManagementView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="UserUpdateView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViolationStatisticsView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViolationTypeCreateView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViolationTypesUpdateView.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViolationTypesView.xaml.cs">
+    <Compile Update="AdminDashboardWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

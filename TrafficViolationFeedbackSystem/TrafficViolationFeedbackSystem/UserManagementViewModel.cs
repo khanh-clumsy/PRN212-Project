@@ -95,7 +95,7 @@ namespace TrafficViolationFeedbackSystem
 
         private void Create(object parameter)
         {
-            var mainWindow = Application.Current.MainWindow?.DataContext as MainViewModel;
+            var mainWindow = Application.Current.MainWindow?.DataContext as AdminDashboardModel;
             if (mainWindow != null)
             {
                 mainWindow.CurrentView = new UserCreateView { DataContext = new UserCreateViewModel() };
@@ -112,7 +112,7 @@ namespace TrafficViolationFeedbackSystem
         {
             if (SelectedUser == null) return;
 
-            var mainWindow = Application.Current.MainWindow?.DataContext as MainViewModel;
+            var mainWindow = Application.Current.MainWindow?.DataContext as AdminDashboardModel;
             if (mainWindow != null)
             {
                 mainWindow.CurrentView = new UserUpdateView { DataContext = new UserUpdateViewModel(SelectedUser) };
