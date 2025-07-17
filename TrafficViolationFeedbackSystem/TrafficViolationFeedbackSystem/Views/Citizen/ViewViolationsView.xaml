@@ -29,24 +29,36 @@
                     <DataGridTextColumn Header="Mô Tả" Binding="{Binding Report.Description}" Width="2*" />
                     <DataGridTextColumn Header="Ngày Vi Phạm" Binding="{Binding FineDate, StringFormat=\{0:dd/MM/yyyy\}}" Width="Auto" />
                     <DataGridTextColumn Header="Mức Phạt (VNĐ)" Binding="{Binding FineAmount}" Width="Auto" />
-                    <DataGridTextColumn Header="Đã Nộp Phạt" Binding="{Binding PaidStatusText}" Width="Auto" />
+                    <DataGridTextColumn Header="Biển Kiểm Soát" Binding="{Binding Report.PlateNumber}" Width="100" />
 
                     <!-- Cột chứa nút Gửi kháng cáo -->
                     <DataGridTemplateColumn Header="Kháng Cáo" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Kháng cáo"
-                                        Width="90"
-                                        Height="25"
-                                        Margin="4"
-                                        Background="Orange"
-                                        Foreground="White"
-                                        FontWeight="Bold"
-                                        Tag="{Binding ViolationId}"
-                                        Click="AppealButton_Click"/>
+                    Width="90"
+                    Height="25"
+                    Margin="4"
+                    Background="Orange"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Tag="{Binding ViolationId}"
+                    Click="AppealButton_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CanAppeal}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

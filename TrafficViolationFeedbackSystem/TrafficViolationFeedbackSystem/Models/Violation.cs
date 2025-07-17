@@ -24,6 +24,8 @@ public partial class Violation
 
     public virtual ICollection<Fine> Fines { get; set; } = new List<Fine>();
 
+    public bool CanAppeal => Appeals == null || Appeals.Count == 0;
+
     public virtual Report Report { get; set; } = null!;
 
     public virtual User Violator { get; set; } = null!;

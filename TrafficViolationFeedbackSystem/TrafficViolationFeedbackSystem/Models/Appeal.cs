@@ -16,10 +16,6 @@ public partial class Appeal
     public DateTime? SubmitDate { get; set; }
 
     public string? Result { get; set; }
-
-    public virtual Violation Violation { get; set; } = null!;
-
-    public virtual User Violator { get; set; } = null!;
     public string DisplayResult
     {
         get
@@ -33,4 +29,8 @@ public partial class Appeal
             };
         }
     }
+    public virtual Violation Violation { get; set; } = null!;
+
+    public virtual User Violator { get; set; } = null!;
+    
 }

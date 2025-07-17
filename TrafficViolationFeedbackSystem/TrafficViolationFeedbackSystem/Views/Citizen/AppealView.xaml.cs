@@ -22,7 +22,8 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     /// </summary>
     public partial class AppealView : UserControl
     {
-        private int userId = Int32.Parse(AuthenticationContext.UserId);
+        private int userId =Int32.Parse(AuthenticationContext.UserId);
+
         public AppealView()
         {
             InitializeComponent();
@@ -52,7 +53,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                 return;
             }
 
-            if (!string.IsNullOrEmpty(appeal.Result))
+            if (!appeal.Result.Equals("Pending"))
             {
                 MessageBox.Show("Kháng cáo đã được xử lý, không thể sửa.");
                 return;

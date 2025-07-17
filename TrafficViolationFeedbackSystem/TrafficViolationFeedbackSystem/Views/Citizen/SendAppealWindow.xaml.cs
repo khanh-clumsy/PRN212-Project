@@ -65,7 +65,6 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                 // Cập nhật nội dung kháng cáo
                 dao.UpdateAppeal(_appealId.Value, content); // bạn chỉ cần thêm 1 hàm Update
             }
-
             else
             {
                 // Thêm mới
@@ -74,10 +73,9 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                     ViolationId = _violationId,
                     ViolatorId = _userId,
                     Content = content,
-                    SubmitDate = DateTime.Now,
-                    Result = "Pending"
+                    Result = "Pending",
+                    SubmitDate = DateTime.Now
                 };
-
                 dao.AddAppeal(appeal);
             }
 
