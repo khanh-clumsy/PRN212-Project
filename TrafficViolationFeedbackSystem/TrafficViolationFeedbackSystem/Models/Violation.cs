@@ -15,7 +15,9 @@ public partial class Violation
 
     public DateTime? FineDate { get; set; }
 
-    public bool? PaidStatus { get; set; }
+    public DateTime? DueDate { get; set; }
+
+    public string? Status { get; set; }
 
     public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();
 

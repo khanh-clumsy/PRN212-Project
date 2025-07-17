@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="TrafficViolationFeedbackSystem.ViolationTypesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Grid d:DesignHeight="450" d:DesignWidth="1000">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header và các nút -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Manage Violation Types" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button Content="➕ Create" Margin="10,0,0,0" Padding="10,2" Command="{Binding CreateCommand}" 
+                    Background="#4CAF50" Foreground="White" BorderThickness="0"/>
+            <Button Content="✏️ Update" Margin="10,0,0,0" Padding="10,2" Command="{Binding UpdateCommand}" 
+                    Background="#FF9800" Foreground="White" BorderThickness="0" IsEnabled="{Binding IsViolationTypeSelected}"/>
+            <Button Content="🗑️ Delete" Margin="10,0,0,0" Padding="10,2" Command="{Binding DeleteCommand}" 
+                    Background="#F44336" Foreground="White" BorderThickness="0" IsEnabled="{Binding IsViolationTypeSelected}"/>
+        </StackPanel>
+
+        <!-- DataGrid hiển thị danh sách loại vi phạm -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding ViolationTypes}" AutoGenerateColumns="False" Margin="10"
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedViolationType}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ViolationTypeId}" Width="50"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300"/>
+                <DataGridTextColumn Header="Standard Fine" Binding="{Binding StandardFine, StringFormat=\{0:N0\} VND}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
