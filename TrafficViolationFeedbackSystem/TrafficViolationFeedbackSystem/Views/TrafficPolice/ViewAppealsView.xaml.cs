@@ -109,13 +109,18 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                     .FirstOrDefaultAsync(vio => vio.ViolationId == violation.ViolationId);
                 if (v != null)
                 {
-                    var fine = new Fine
+                    // Check if a fine already exists for this violation
+                    bool fineExists = await _context.Fines.AnyAsync(f => f.ViolationId == v.ViolationId);
+                    if (!fineExists)
                     {
-                        ViolationId = v.ViolationId,
-                        Amount = v.FineAmount,
-                        Status = "Pending"
-                    };
-                    _context.Fines.Add(fine);
+                        var fine = new Fine
+                        {
+                            ViolationId = v.ViolationId,
+                            Amount = v.FineAmount,
+                            Status = "Pending"
+                        };
+                        _context.Fines.Add(fine);
+                    }
                 }
                 await _context.SaveChangesAsync();
                 await LoadDataAsync();
