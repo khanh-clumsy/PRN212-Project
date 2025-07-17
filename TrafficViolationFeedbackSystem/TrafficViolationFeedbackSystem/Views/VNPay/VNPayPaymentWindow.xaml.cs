@@ -46,7 +46,6 @@ namespace TrafficViolationFeedbackSystem.Views.VNPay
                         {
                             // ✅ Giao dịch thành công → gọi lưu DB nếu cần
                             await SavePaymentToDatabase(fineId, transactionNo, amountRaw);
-
                             MessageBox.Show("✅ Thanh toán thành công!");
                             this.Close();
                         }

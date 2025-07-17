@@ -41,14 +41,13 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
         private void LoadStatuses()
         {
             var statuses = new List<string>
-    {
-        "Active",
-        "Appealed",
-        "RejectedAppeal",
-        "Cancelled",
-        "Paid"
-    };
-
+                {
+                    "Active",
+                    "Appealed",
+                    "RejectedAppeal",
+                    "Cancelled",
+                    "Paid"
+                };
             StatusFilterBox.ItemsSource = statuses;
         }
 
