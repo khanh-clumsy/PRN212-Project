@@ -85,17 +85,17 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
                 {
                     case "Citizen":
                         MessageBox.Show("Đăng nhập bằng vai trò: Người dân", "Vai trò", MessageBoxButton.OK);
-                        dashboardWindow = new CitizenDashboardWindow();
+                        dashboardWindow = new CitizenDashboardWindow(user.UserId);
                         break;
 
                     case "Admin":
                         MessageBox.Show("Admin", "Admin", MessageBoxButton.OK);
-                        //dashboardWindow = new AdminDashboardWindow(); // nếu có
+                        //dashboardWindow = new AdminDashboardWindow(user.UserId); // nếu có
                         break;
 
                     case "TrafficPolice":
                         MessageBox.Show("Đăng nhập bằng vai trò: Cảnh sát giao thông", "Vai trò", MessageBoxButton.OK);
-                        dashboardWindow = new TrafficPoliceDashboardWindow(); // nếu có
+                        dashboardWindow = new TrafficPoliceDashboardWindow(user.UserId); // nếu có
                         break;
 
                     default:

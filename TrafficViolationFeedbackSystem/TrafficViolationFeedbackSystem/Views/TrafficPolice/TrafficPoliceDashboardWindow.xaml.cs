@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TrafficViolationFeedbackSystem.Data;
+using TrafficViolationFeedbackSystem.Models;
 using TrafficViolationFeedbackSystem.Views.Authentication;
 using TrafficViolationFeedbackSystem.Views.Citizen;
 
@@ -10,9 +11,11 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
     public partial class TrafficPoliceDashboardWindow : Window
     {
         private readonly TrafficViolationFeedbackSystemContext _context = new TrafficViolationFeedbackSystemContext();
-        public TrafficPoliceDashboardWindow()
+        private readonly int _currentUserId;
+        public TrafficPoliceDashboardWindow(int userId)
         {
             InitializeComponent();
+            _currentUserId = userId;
             var btn = btnHome;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
@@ -49,7 +52,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
             var btn = sender as Button;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
-            SetContent(new ProfileView());
+            SetContent(new ProfileUser(_currentUserId));
         }
 
         private void btnStatistics_Click(object sender, RoutedEventArgs e)

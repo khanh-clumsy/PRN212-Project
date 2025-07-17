@@ -19,10 +19,6 @@ public partial class User
 
     public string? Address { get; set; }
 
-    public string? ResetCode { get; set; }
-
-    public DateTime? ResetCodeExpiry { get; set; }
-
     public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();
 
     public virtual ICollection<Fine> FineConfirmedByNavigations { get; set; } = new List<Fine>();

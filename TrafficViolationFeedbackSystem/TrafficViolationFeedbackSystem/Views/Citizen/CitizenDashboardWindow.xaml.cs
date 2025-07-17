@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.Data;
+using TrafficViolationFeedbackSystem.Models;
 using TrafficViolationFeedbackSystem.Services;
 using TrafficViolationFeedbackSystem.Views.Authentication;
 
@@ -22,14 +23,17 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     /// </summary>
     public partial class CitizenDashboardWindow : Window
     {
-        private readonly TrafficViolationFeedbackSystemContext _context = new TrafficViolationFeedbackSystemContext(); 
-        public CitizenDashboardWindow()
+        private readonly TrafficViolationFeedbackSystemContext _context = new TrafficViolationFeedbackSystemContext();
+        private readonly int _currentUserId;
+        public CitizenDashboardWindow(int userId)
         {
             InitializeComponent();
+            _currentUserId = userId;
             var btn = btnHome;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
             SetContent(new HomeView(SetContent, _context));
+            
         }
 
         public void SetContent(UserControl view)
@@ -58,12 +62,13 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Xử lý mở Hồ sơ cá nhân
+         //TODO: Xử lý mở Hồ sơ cá nhân
             ResetSidebarButtonStyles();
             var btn = sender as Button;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
-            SetContent(new ProfileView());
+            SetContent(new ProfileUser(_currentUserId));
+
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
