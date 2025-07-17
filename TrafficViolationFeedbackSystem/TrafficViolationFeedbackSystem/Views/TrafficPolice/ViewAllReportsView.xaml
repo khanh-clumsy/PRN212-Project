@@ -1,0 +1,58 @@
+<UserControl x:Class="TrafficViolationFeedbackSystem.Views.TrafficPolice.ViewAllReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrafficViolationFeedbackSystem.Views.TrafficPolice"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Header -->
+        <TextBlock Text="📝 Danh sách phản ánh mới" FontSize="28" FontWeight="Bold" Foreground="#007BFF" Margin="0,0,0,10" Grid.Row="0"/>
+        <!-- Search/Filter row -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,0,0,10" VerticalAlignment="Center">
+            <TextBlock Text="Tìm kiếm biển số xe:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox x:Name="txtSearch" Width="220" Height="32" Margin="0,0,10,0" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="cbStatusFilter" Width="150" Height="32" Margin="0,0,10,0" VerticalContentAlignment="Center">
+                <ComboBoxItem Content="Tất cả trạng thái" Tag="" IsSelected="True"/>
+                <ComboBoxItem Content="Chờ duyệt" Tag="Pending"/>
+                <ComboBoxItem Content="Đã duyệt" Tag="Approved"/>
+                <ComboBoxItem Content="Từ chối" Tag="Rejected"/>
+            </ComboBox>
+            <Button Content="Lọc" Width="100" Height="32" Click="btnSearch_Click"/>
+        </StackPanel>
+        <!-- DataGrid -->
+        <DataGrid x:Name="dgReports" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,10,0,0" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ReportId}" Width="60"/>
+                <DataGridTextColumn Header="Biển số" Binding="{Binding PlateNumber}" Width="120"/>
+                <DataGridTextColumn Header="Chủ xe vi phạm" Binding="{Binding OwnerName}" Width="120"/>
+                <DataGridTextColumn Header="Loại vi phạm" Binding="{Binding ViolationTypeName}" Width="160"/>
+                <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="200"/>
+                <DataGridTextColumn Header="Địa điểm" Binding="{Binding Location}" Width="140"/>
+                <DataGridTextColumn Header="Ngày gửi" Binding="{Binding ReportDate, StringFormat=dd/MM/yyyy HH:mm}" Width="140"/>
+                <DataGridTextColumn Header="Trạng thái" Binding="{Binding StatusDisplay}" Width="100"/>
+                <DataGridTemplateColumn Header="Hành động" Width="220">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="Duyệt" Margin="2" Padding="8,2" 
+                                        Visibility="{Binding IsActionVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+                                        Click="btnApprove_Click"/>
+                                <Button Content="Từ chối" Margin="2" Padding="8,2" 
+                                        Visibility="{Binding IsActionVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                                        Click="btnReject_Click"/>
+                                <Button Content="Xem chi tiết" Margin="2" Padding="8,2" Click="btnDetail_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl> 

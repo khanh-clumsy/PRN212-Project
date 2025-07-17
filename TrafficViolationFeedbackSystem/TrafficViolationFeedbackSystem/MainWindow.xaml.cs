@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrafficViolationFeedbackSystem.Views.Authentication;
 
 namespace TrafficViolationFeedbackSystem
 {
@@ -19,6 +20,13 @@ namespace TrafficViolationFeedbackSystem
         public MainWindow()
         {
             InitializeComponent();
+            
+            // Khởi động với màn hình đăng nhập
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
+            
+            // Ẩn MainWindow
+            this.Hide();
         }
     }
 }
