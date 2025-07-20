@@ -39,8 +39,7 @@ namespace TrafficViolationFeedbackSystem.Views.Admin
             if (user != null)
             {
                 txtFullName.Text = user.FullName;
-                txtEmail.Text = user.Email;
-                txtPassword.Text = user.Password;
+                txtEmail.Text = user.Email;              
                 cbRole.SelectedItem = cbRole.Items.Cast<ComboBoxItem>().FirstOrDefault(item => item.Content.ToString() == user.Role);
                 txtPhone.Text = user.Phone;
                 txtAddress.Text = user.Address;
@@ -86,19 +85,7 @@ namespace TrafficViolationFeedbackSystem.Views.Admin
                 {
                     MessageBox.Show("Email đã tồn tại trong hệ thống!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
-                }
-
-                // Validate Mật khẩu: Ít nhất 6 ký tự
-                if (string.IsNullOrWhiteSpace(txtPassword.Text))
-                {
-                    MessageBox.Show("Mật khẩu không được để trống!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-                if (txtPassword.Text.Length < 6)
-                {
-                    MessageBox.Show("Mật khẩu phải có ít nhất 6 ký tự!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
+                }             
 
                 // Validate Vai trò: Phải được chọn
                 if (cbRole.SelectedItem == null)
@@ -129,11 +116,9 @@ namespace TrafficViolationFeedbackSystem.Views.Admin
                 {
                     user.FullName = txtFullName.Text;
                     user.Email = txtEmail.Text;
-                    user.Password = txtPassword.Text;
                     user.Role = (cbRole.SelectedItem as ComboBoxItem)?.Content.ToString();
                     user.Phone = txtPhone.Text;
                     user.Address = txtAddress.Text;
-
                     _context.SaveChanges();
                     MessageBox.Show("Cập nhật tài khoản thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                     _onCancel(); // Quay lại màn hình quản lý tài khoản

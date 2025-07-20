@@ -49,10 +49,7 @@
 
                     <Label Grid.Row="1" Grid.Column="0" Content="Email:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiBold"/>
                     <TextBox x:Name="txtEmail" Grid.Row="1" Grid.Column="1" Margin="0,5,0,10" FontSize="16" Padding="5" VerticalContentAlignment="Center"/>
-
-                    <Label Grid.Row="2" Grid.Column="0" Content="Mật khẩu:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiBold"/>
-                    <TextBox x:Name="txtPassword" Grid.Row="2" Grid.Column="1" Margin="0,5,0,10" FontSize="16" Padding="5" VerticalContentAlignment="Center"/>
-
+                 
                     <Label Grid.Row="3" Grid.Column="0" Content="Vai trò:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiBold"/>
                     <ComboBox x:Name="cbRole" Grid.Row="3" Grid.Column="1" Margin="0,5,0,10" FontSize="16" Padding="5" VerticalContentAlignment="Center">
                         <ComboBoxItem Content="Citizen"/>
