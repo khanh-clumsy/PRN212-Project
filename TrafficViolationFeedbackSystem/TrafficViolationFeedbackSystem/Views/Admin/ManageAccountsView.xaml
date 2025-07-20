@@ -59,7 +59,7 @@
                    FontSize="14" 
                    FontWeight="SemiBold" 
                    VerticalAlignment="Center" 
-                   Margin="20,0,5,0"/>
+                   Margin="190,0,5,0"/>
             <TextBox x:Name="txtFilterName" 
                      Width="200" 
                      Height="35" 

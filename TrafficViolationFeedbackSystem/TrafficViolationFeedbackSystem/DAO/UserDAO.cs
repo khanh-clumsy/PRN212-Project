@@ -149,6 +149,7 @@ namespace TrafficViolationFeedbackSystem.DAO
 
                 // Cập nhật thông tin
                 existingUser.FullName = user.FullName;
+                existingUser.Email = user.Email;
                 existingUser.Phone = user.Phone;
                 existingUser.Address = user.Address;
 

@@ -116,6 +116,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                 if (user != null)
                 {
                     user.FullName = txtFullName.Text;
+                    user.Email = txtEmail.Text;
                     user.Phone = string.IsNullOrWhiteSpace(txtPhone.Text) || txtPhone.Text == "Chưa cập nhật" ? null : txtPhone.Text;
                     user.Address = string.IsNullOrWhiteSpace(txtAddress.Text) || txtAddress.Text == "Chưa cập nhật" ? null : txtAddress.Text;
                     var (success, message) = _userDAO.UpdateUser(user);
