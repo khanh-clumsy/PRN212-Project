@@ -16,8 +16,21 @@ public partial class Appeal
     public DateTime? SubmitDate { get; set; }
 
     public string? Result { get; set; }
-
+    public string DisplayResult
+    {
+        get
+        {
+            return Result switch
+            {
+                "Approved" => "Đã duyệt",
+                "Rejected" => "Từ chối",
+                "Pending" or null or "" => "Đang chờ",
+                _ => Result
+            };
+        }
+    }
     public virtual Violation Violation { get; set; } = null!;
 
     public virtual User Violator { get; set; } = null!;
+    
 }

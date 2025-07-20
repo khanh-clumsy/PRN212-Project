@@ -1,0 +1,78 @@
+<UserControl x:Class="TrafficViolationFeedbackSystem.Views.TrafficPolice.ViewAllViolationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="1000">
+
+    <Grid Margin="20">
+        <StackPanel>
+
+            <!-- Tiêu đề -->
+            <TextBlock Text="📋 Danh sách tất cả vi phạm giao thông"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="DarkRed"
+                       Margin="0 0 0 10"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Tìm kiếm & lọc -->
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 0 0 10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+
+                <!-- Tìm mô tả -->
+                <TextBox x:Name="SearchBox"
+                         Width="200"
+                         Height="28"
+                         Margin="0 0 10 0" />
+
+                <Button Content="🔍 Tìm"
+                        Width="80"
+                        Height="28"
+                        Margin="0 0 20 0"
+                        Click="SearchButton_Click"/>
+
+                <!-- Lọc loại vi phạm -->
+                <ComboBox x:Name="ViolationTypeFilterBox"
+                          Width="200"
+                          Height="28"
+                          Margin="0 0 10 0"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="ViolationTypeId" />
+
+                <!-- Lọc trạng thái -->
+                <ComboBox x:Name="StatusFilterBox"
+          Width="150"
+          Height="28"
+          Margin="0 0 10 0" />
+
+
+                <Button Content="🧾 Lọc"
+                        Width="80"
+                        Height="28"
+                        Click="FilterButton_Click"/>
+            </StackPanel>
+
+            <!-- Bảng vi phạm -->
+            <DataGrid x:Name="dgAllViolations"
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="Column"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      FontSize="14">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã Vi Phạm" Binding="{Binding ViolationId}" Width="Auto" />
+                    <DataGridTextColumn Header="Loại Vi Phạm" Binding="{Binding Report.ViolationType.Name}" Width="*" />
+                    <DataGridTextColumn Header="Mô Tả" Binding="{Binding Report.Description}" Width="2*" />
+                    <DataGridTextColumn Header="Ngày Vi Phạm" Binding="{Binding FineDate, StringFormat={}{0:dd/MM/yyyy}}" Width="Auto" />
+                    <DataGridTextColumn Header="Mức Phạt (VNĐ)" Binding="{Binding FineAmount}" Width="Auto" />
+                    <DataGridTextColumn Header="Người Vi Phạm" Binding="{Binding Violator.FullName}" Width="*" />
+                    <DataGridTextColumn Header="Trạng Thái" Binding="{Binding Status}" Width="Auto" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>
