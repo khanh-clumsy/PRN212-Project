@@ -20,7 +20,7 @@ public partial class Violation
 
     public string? Status { get; set; }
 
-    public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();1
+    public virtual ICollection<Appeal> Appeals { get; set; } = new List<Appeal>();
 
     public virtual ICollection<Fine> Fines { get; set; } = new List<Fine>();
 

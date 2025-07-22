@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.Data;
 using TrafficViolationFeedbackSystem.Models;
+using TrafficViolationFeedbackSystem.Views.Admin;
 using TrafficViolationFeedbackSystem.Views.Citizen;
 using TrafficViolationFeedbackSystem.Views.TrafficPolice;
 
@@ -90,7 +91,7 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
 
                     case "Admin":
                         MessageBox.Show("Admin", "Admin", MessageBoxButton.OK);
-                        //dashboardWindow = new AdminDashboardWindow(user.UserId); // nếu có
+                        dashboardWindow = new AdminDashboardWindow(); // nếu có
                         break;
 
                     case "TrafficPolice":

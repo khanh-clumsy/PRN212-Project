@@ -59,6 +59,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                 var payWindow = new VNPayPaymentWindow(paymentUrl);
                 payWindow.ShowDialog();
             }
+            LoadFine();
         }
 
     }

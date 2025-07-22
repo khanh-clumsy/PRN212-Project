@@ -2,7 +2,7 @@
 
 public static class VNPayHelper
 {
-    public static string CreatePaymentUrl(decimal amount, string orderId, string description)
+    public static string CreatePaymentUrl(decimal amount, string fineId, string description)
     {
         var pay = new VnPayLibrary();
 
@@ -17,7 +17,7 @@ public static class VNPayHelper
         pay.AddRequestData("vnp_OrderInfo", description);
         pay.AddRequestData("vnp_OrderType", "other");
         pay.AddRequestData("vnp_ReturnUrl", VNPayConfig.ReturnUrl);
-        pay.AddRequestData("vnp_TxnRef", orderId);
+        pay.AddRequestData("vnp_TxnRef", fineId);
 
         return pay.CreateRequestUrl(VNPayConfig.BaseUrl, VNPayConfig.HashSecret);
     }

@@ -40,6 +40,11 @@
         Style="{StaticResource ModernButton}"
         Click="btnAppeal_Click"/>
 
+        <Button Content="Danh sách hóa đơn"
+        Grid.Row="1" Grid.Column="1"
+        Style="{StaticResource ModernButton}"
+        Click="btnViewInvoice_Click"/>   
+
         <Button Content="💳 Nộp phạt"
         Grid.Row="1" Grid.Column="2"
         Style="{StaticResource ModernButton}"
