@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TrafficViolationFeedbackSystem.DAO;
 using TrafficViolationFeedbackSystem.Data;
 using TrafficViolationFeedbackSystem.Models;
+using TrafficViolationFeedbackSystem.Services;
 using TrafficViolationFeedbackSystem.ViewModels;
 
 namespace TrafficViolationFeedbackSystem.Controllers
@@ -12,10 +13,10 @@ namespace TrafficViolationFeedbackSystem.Controllers
         private readonly ReportDAO _reportDAO;
         private readonly ViolationTypesDAO _violationTypesDAO;
         private readonly UserDAO _userDAO;
-
-
+        private readonly TrafficViolationFeedbackSystemContext _context;
         public ReportController(TrafficViolationFeedbackSystemContext context)
         {
+            _context = new TrafficViolationFeedbackSystemContext();
             _reportDAO = new ReportDAO(context);
             _violationTypesDAO = new ViolationTypesDAO(context);
             _userDAO = new UserDAO(context);

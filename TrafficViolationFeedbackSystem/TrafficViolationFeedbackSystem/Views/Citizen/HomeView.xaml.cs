@@ -58,7 +58,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
 
         private void btnViewInvoice_Click(object sender, RoutedEventArgs e)
         {
-
+            setContent?.Invoke(new AllFineView());
         }
     }
 }

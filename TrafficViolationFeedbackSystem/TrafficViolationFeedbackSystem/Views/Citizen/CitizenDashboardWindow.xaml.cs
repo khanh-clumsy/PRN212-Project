@@ -68,7 +68,6 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
             SetContent(new ProfileUser(_currentUserId));
-
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)

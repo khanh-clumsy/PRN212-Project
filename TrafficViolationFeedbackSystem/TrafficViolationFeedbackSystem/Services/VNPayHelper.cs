@@ -17,7 +17,7 @@ public static class VNPayHelper
         pay.AddRequestData("vnp_OrderInfo", description);
         pay.AddRequestData("vnp_OrderType", "other");
         pay.AddRequestData("vnp_ReturnUrl", VNPayConfig.ReturnUrl);
-        pay.AddRequestData("vnp_TxnRef", fineId);
+        pay.AddRequestData("vnp_TxnRef", $"{fineId}_{DateTime.Now.Ticks}");
 
         return pay.CreateRequestUrl(VNPayConfig.BaseUrl, VNPayConfig.HashSecret);
     }

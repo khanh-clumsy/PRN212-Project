@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
+using TrafficViolationFeedbackSystem.Controllers;
 using TrafficViolationFeedbackSystem.Data;
 using TrafficViolationFeedbackSystem.Services;
 using TrafficViolationFeedbackSystem.ViewModels;
@@ -26,31 +27,21 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
     public partial class PayFineView : UserControl
     {
         private readonly TrafficViolationFeedbackSystemContext _context;
+        private readonly FineController _fineController;
         public PayFineView()
         {
             InitializeComponent();
             _context = new TrafficViolationFeedbackSystemContext();
+            _fineController = new FineController();
             LoadFine();
         }
 
         public void LoadFine()
         {
-            int currentUserId = int.Parse(AuthenticationContext.UserId);
-
-            var fines = _context.Fines
-                .Include(f => f.Violation)
-                .Where(f => f.Violation.ViolatorId == currentUserId && f.Status == "Pending")
-                .Select(f => new FineViewModel
-                {
-                    FineID = f.FineId,
-                    ViolationID = f.ViolationId,
-                    Amount = f.Amount,
-                    Status = f.Status,
-                    PaymentDate = f.PaymentDate
-                })
-                .ToList();
+            var fines = _fineController.LoadPendingFinesForCurrentUser();
             dgFines.ItemsSource = fines;
         }
+
         private void BtnPay_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button btn && btn.Tag is FineViewModel fine)

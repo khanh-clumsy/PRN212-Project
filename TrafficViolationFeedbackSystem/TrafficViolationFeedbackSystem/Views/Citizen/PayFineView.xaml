@@ -22,10 +22,11 @@
                       Margin="0 10 0 0"
                       FontSize="14">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã Vi Phạm" Binding="{Binding ViolationID}" Width="Auto"/>
+                    <DataGridTextColumn Header="Mã Hóa Đơn" Binding="{Binding FineID}" Width="1*"/>
+                    <DataGridTextColumn Header="Mã Vi Phạm" Binding="{Binding ViolationID}" Width="1*"/>
+                    <DataGridTextColumn Header="Tên vi phạm" Binding="{Binding ViolationName}" Width="*"/>
                     <DataGridTextColumn Header="Số tiền" Binding="{Binding Amount, StringFormat='{}{0:N0} đ'}" Width="*"/>
                     <DataGridTextColumn Header="Trạng thái" Binding="{Binding DisplayResult}" Width="*"/>
-                    <DataGridTextColumn Header="Ngày thanh toán" Binding="{Binding PaymentDate, StringFormat='dd/MM/yyyy'}" Width="Auto"/>
                     <DataGridTemplateColumn Header="Hành động" Width="120">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

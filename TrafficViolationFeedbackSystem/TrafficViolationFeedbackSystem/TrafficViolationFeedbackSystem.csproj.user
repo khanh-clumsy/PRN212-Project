@@ -17,6 +17,9 @@
     <Compile Update="Views\Authentication\VerifyCodeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Citizen\AllFineView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Citizen\AppealView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

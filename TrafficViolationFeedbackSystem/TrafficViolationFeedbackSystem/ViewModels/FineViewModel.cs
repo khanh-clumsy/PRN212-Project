@@ -28,6 +28,9 @@ namespace TrafficViolationFeedbackSystem.ViewModels
                 };
             }
         }
+        public string? TransactionCode { get; set; }
+        public string? PaymentMethod { get; set; }
+        public string ViolationName { get; internal set; }
     }
 
 }
