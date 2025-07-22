@@ -6,24 +6,32 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.DAO;
 using TrafficViolationFeedbackSystem.Data;
 
 namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
 {
-    public partial class ProfileUser : UserControl
+    /// <summary>
+    /// Interaction logic for ProfileTrafficPolice.xaml
+    /// </summary>
+    public partial class ProfileTrafficPolice : Window
     {
-
         private readonly UserDAO _userDAO;
         private readonly int _currentUserId;
 
-        public ProfileUser(int userId)
-            {
-                InitializeComponent();
-                _currentUserId = userId;
-                _userDAO = new UserDAO(new TrafficViolationFeedbackSystemContext());
-                LoadUserProfile();
-            }
+        public ProfileTrafficPolice(int userId)
+        {
+            InitializeComponent();
+            _currentUserId = userId;
+            _userDAO = new UserDAO(new TrafficViolationFeedbackSystemContext());
+            LoadUserProfile();
+        }
 
         private void LoadUserProfile()
         {
@@ -48,6 +56,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                 MessageBox.Show($"Lỗi khi tải thông tin hồ sơ: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void LoadVehicles()
         {
             try
@@ -107,6 +116,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
                 if (user != null)
                 {
                     user.FullName = txtFullName.Text;
+                    user.Email = txtEmail.Text;
                     user.Phone = string.IsNullOrWhiteSpace(txtPhone.Text) || txtPhone.Text == "Chưa cập nhật" ? null : txtPhone.Text;
                     user.Address = string.IsNullOrWhiteSpace(txtAddress.Text) || txtAddress.Text == "Chưa cập nhật" ? null : txtAddress.Text;
                     var (success, message) = _userDAO.UpdateUser(user);

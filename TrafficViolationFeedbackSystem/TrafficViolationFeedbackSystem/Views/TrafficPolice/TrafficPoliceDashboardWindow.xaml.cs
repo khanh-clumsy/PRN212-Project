@@ -2,7 +2,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using TrafficViolationFeedbackSystem.Data;
-using TrafficViolationFeedbackSystem.Models;
 using TrafficViolationFeedbackSystem.Views.Authentication;
 using TrafficViolationFeedbackSystem.Views.Citizen;
 

@@ -17,7 +17,8 @@ namespace TrafficViolationFeedbackSystem.DAO
         public UserDAO(TrafficViolationFeedbackSystemContext context)
         {
             this._context = context;
-        }       
+        }
+
         /// <summary>
         /// Đăng ký người dùng mới
         /// </summary>
@@ -148,9 +149,9 @@ namespace TrafficViolationFeedbackSystem.DAO
 
                 // Cập nhật thông tin
                 existingUser.FullName = user.FullName;
+                existingUser.Email = user.Email;
                 existingUser.Phone = user.Phone;
                 existingUser.Address = user.Address;
-                existingUser.Email = user.Email;
 
                 _context.SaveChanges();
                 return (true, "Cập nhật thông tin thành công!");
@@ -229,7 +230,5 @@ namespace TrafficViolationFeedbackSystem.DAO
                 .Where(v => v.OwnerId == ownerId)
                 .ToList();
         }
-
-       
     }
 }

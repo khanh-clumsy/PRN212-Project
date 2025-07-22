@@ -33,7 +33,6 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
             btn.Foreground = Brushes.White;
             SetContent(new HomeView(SetContent, _context));
-            
         }
 
         public void SetContent(UserControl view)
@@ -62,7 +61,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
 
         private void btnProfile_Click(object sender, RoutedEventArgs e)
         {
-         //TODO: Xử lý mở Hồ sơ cá nhân
+            // TODO: Xử lý mở Hồ sơ cá nhân
             ResetSidebarButtonStyles();
             var btn = sender as Button;
             btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));

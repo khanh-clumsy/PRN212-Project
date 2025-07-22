@@ -91,12 +91,12 @@ namespace TrafficViolationFeedbackSystem.Views.Authentication
 
                     case "Admin":
                         MessageBox.Show("Admin", "Admin", MessageBoxButton.OK);
-                        dashboardWindow = new AdminDashboardWindow(); // nếu có
+                        dashboardWindow = new AdminDashboardWindow(); 
                         break;
 
                     case "TrafficPolice":
                         MessageBox.Show("Đăng nhập bằng vai trò: Cảnh sát giao thông", "Vai trò", MessageBoxButton.OK);
-                        dashboardWindow = new TrafficPoliceDashboardWindow(user.UserId); // nếu có
+                        dashboardWindow = new TrafficPoliceDashboardWindow(user.UserId); 
                         break;
 
                     default:
