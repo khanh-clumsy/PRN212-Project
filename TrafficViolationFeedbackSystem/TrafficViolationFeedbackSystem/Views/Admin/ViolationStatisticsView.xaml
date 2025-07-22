@@ -24,10 +24,13 @@
 
         <!-- Bộ lọc biển số -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="20,20,0,20">
-            <Label Content="Lọc theo biển số:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,0,10,0"/>
+            <Label Content="Lọc biển số:" FontSize="18" VerticalAlignment="Center" FontWeight="SemiBold" Margin="0,0,10,0"/>
             <TextBox x:Name="txtLicensePlateFilter" Width="200" Margin="0,5,0,10" FontSize="16" Padding="5" VerticalContentAlignment="Center"/>
             <Button x:Name="btnFilter" Content="🔍 Lọc" Width="87" Height="32" Margin="15,0,10,2" Click="btnFilter_Click" Background="LightGreen" Foreground="Black"/>
             <Button x:Name="btnReload" Content="↻ Tải lại" Width="87" Height="32" Margin="0,0,0,2" Click="btnReload_Click" Background="#FFD700" Foreground="Black"/>
+                   
+            <Label Content="Chọn loại vi phạm:" FontSize="16" VerticalAlignment="Center" FontWeight="SemiBold" Margin="180,0,10,0"/>
+            <ComboBox x:Name="cbViolationType" Width="200" Height="32" Margin="0,5,10,2" FontSize="16" VerticalContentAlignment="Center" SelectionChanged="cbViolationType_SelectionChanged"/>
         </StackPanel>
 
         <!-- Danh sách vi phạm -->
