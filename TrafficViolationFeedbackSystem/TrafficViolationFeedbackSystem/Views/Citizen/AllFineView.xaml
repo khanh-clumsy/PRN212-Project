@@ -83,6 +83,21 @@
                   CanUserAddRows="False"
                   IsReadOnly="True"
                   >
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Status}" Value="Pending">
+                            <Setter Property="Background" Value="#FFFDE9B6"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Status}" Value="Success">
+                            <Setter Property="Background" Value="#FFDFFFD6"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Status}" Value="Failed">
+                            <Setter Property="Background" Value="#FFF8D7DA"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Mã hóa đơn" Binding="{Binding FineID}" Width="1*"/>
                 <DataGridTextColumn Header="Vi phạm" Binding="{Binding ViolationName}" Width="3*" />

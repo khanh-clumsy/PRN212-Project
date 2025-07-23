@@ -138,7 +138,7 @@ namespace TrafficViolationFeedbackSystem.Views.Citizen
                 bool reportExists = await _context.Reports.AnyAsync(r =>
                     r.ReporterId == reporterId &&
                     r.PlateNumber == plateNumber &&
-                    (r.Status == "Pending" || r.Status == "Approved" || r.Status == "Rejected"));
+                    (r.Status == "Pending"));
 
                 if (reportExists)
                 {

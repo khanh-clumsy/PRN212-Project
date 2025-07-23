@@ -28,7 +28,7 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
 
         private void ResetSidebarButtonStyles()
         {
-            var buttons = new[] { btnHome, btnStatistics, btnProfile, btnLogout };
+            var buttons = new[] { btnHome, btnProfile, btnLogout };
             foreach (var btn in buttons)
             {
                 btn.Background = Brushes.Transparent;
@@ -53,16 +53,6 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
             btn.Foreground = Brushes.White;
             SetContent(new ProfileUser(_currentUserId));
         }
-
-        private void btnStatistics_Click(object sender, RoutedEventArgs e)
-        {
-            ResetSidebarButtonStyles();
-            var btn = sender as Button;
-            btn.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007BFF"));
-            btn.Foreground = Brushes.White;
-            SetContent(new TrafficPoliceStatisticsView());
-        }
-
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);

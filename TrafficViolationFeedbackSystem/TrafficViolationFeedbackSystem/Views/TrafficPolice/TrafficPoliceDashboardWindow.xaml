@@ -39,13 +39,7 @@
                     Foreground="#007BFF"
                     Width="220"
                     Click="btnProfile_Click"/>  
-                <Button x:Name="btnStatistics"
-                    Content="📊 Thống kê"
-                    Style="{StaticResource ModernButton}"
-                    Background="Transparent"
-                    Foreground="#007BFF"
-                    Width="220"
-                    Click="btnStatistics_Click"/>
+              
                 <Button x:Name="btnLogout"
                     Content="🚪 Đăng xuất"
                     Style="{StaticResource ModernButton}"

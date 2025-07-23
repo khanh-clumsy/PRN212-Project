@@ -50,7 +50,7 @@ namespace TrafficViolationFeedbackSystem.Views.Admin
                 {
                     foreach (var item in violationTypes)
                     {
-                        cbViolationType.Items.Add(item); 
+                        cbViolationType.Items.Add(item);
                     }
                 }
                 else
@@ -106,8 +106,8 @@ namespace TrafficViolationFeedbackSystem.Views.Admin
             if (cbViolationType.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag != null)
             {
                 violationTypeId = (int?)selectedItem.Tag;
-            }          
-                LoadViolations(licensePlateFilter, violationTypeId);
+            }
+            LoadViolations(licensePlateFilter, violationTypeId);
 
             var filteredViolations = _context.Violations
                 .Include(v => v.Report)
@@ -145,7 +145,7 @@ namespace TrafficViolationFeedbackSystem.Views.Admin
             txtLicensePlateFilter.Text = string.Empty;
             cbViolationType.SelectedIndex = 0; // Quay lại "Tất cả loại vi phạm"
         }
-        
-        
+
+
     }
 }

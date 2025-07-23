@@ -84,8 +84,7 @@ namespace TrafficViolationFeedbackSystem.Views.Admin
                                 _context.Reports.Any(r => r.ReporterId == user.UserId || r.ProcessedBy == user.UserId) ||
                                 _context.Violations.Any(v => v.ViolatorId == user.UserId) ||
                                 _context.Fines.Any(f => f.CreatedBy == user.UserId || f.ConfirmedBy == user.UserId) ||
-                                _context.Appeals.Any(a => a.ViolatorId == user.UserId) ||
-                                _context.Notifications.Any(n => n.UserId == user.UserId))
+                                _context.Appeals.Any(a => a.ViolatorId == user.UserId))
                             {
                                 MessageBox.Show("Không thể xóa tài khoản này vì nó đang được sử dụng trong các bản ghi khác!",
                                     "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);

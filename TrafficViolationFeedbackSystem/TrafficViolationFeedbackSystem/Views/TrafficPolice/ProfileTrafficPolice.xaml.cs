@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrafficViolationFeedbackSystem.DAO;
 using TrafficViolationFeedbackSystem.Data;
+using TrafficViolationFeedbackSystem.Views.Citizen;
+using TrafficViolationFeedbackSystem.Views.Shared;
 
 namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
 {
@@ -76,6 +78,11 @@ namespace TrafficViolationFeedbackSystem.Views.TrafficPolice
             {
                 MessageBox.Show($"Lỗi khi tải danh sách phương tiện: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void ChangePassword_Click (object sender, RoutedEventArgs e)
+        {
+            ChangePasswordWindow changePasswordWindow = new ChangePasswordWindow();
+            changePasswordWindow.ShowDialog();
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

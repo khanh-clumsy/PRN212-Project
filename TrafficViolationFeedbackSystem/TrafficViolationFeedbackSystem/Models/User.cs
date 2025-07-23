@@ -29,8 +29,6 @@ public partial class User
 
     public virtual ICollection<Fine> FineCreatedByNavigations { get; set; } = new List<Fine>();
 
-    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
-
     public virtual ICollection<Report> ReportProcessedByNavigations { get; set; } = new List<Report>();
 
     public virtual ICollection<Report> ReportReporters { get; set; } = new List<Report>();

@@ -44,7 +44,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ReportId}" Width="60"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ReportId}" Width="30"/>
                 <DataGridTextColumn Header="Biển số" Binding="{Binding PlateNumber}" Width="120"/>
                 <DataGridTextColumn Header="Loại vi phạm" Binding="{Binding ViolationTypeName}" Width="160"/>
                 <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="200"/>

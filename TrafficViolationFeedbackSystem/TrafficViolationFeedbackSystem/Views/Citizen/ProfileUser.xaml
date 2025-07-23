@@ -72,6 +72,11 @@
                 Width="120" Height="40" Background="Green" Foreground="White" 
                 FontSize="16" FontWeight="SemiBold" Margin="0,233,10,370" 
                 HorizontalAlignment="Right" Click="UpdateButton_Click"/>
+        <!-- Nút Đổi Mật Khẩu -->
+        <Button Grid.Row="1" Content="Đổi Mật Khẩu" 
+        Width="150" Height="40" Background="#FFA500" Foreground="White" 
+        FontSize="16" FontWeight="SemiBold" Margin="0,233,140,370"
+        HorizontalAlignment="Right" Click="ChangePassword_Click"/>
 
         <!-- Danh sách phương tiện -->
         <StackPanel Grid.Row="1" Margin="0,253,0,20">
